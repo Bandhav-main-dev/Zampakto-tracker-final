@@ -1,0 +1,178 @@
+[
+  {
+    "name": "Shinjitsu Tenshō",
+    "kanji": "真実天衝",
+    "domain": "AI / Machine Learning",
+    "release_command": "Pierce reality… Shinjitsu Tenshō!",
+    "power": "Unites APIs, semantic AI, and automation to build intelligent truth engines.",
+    "shikai_unlocked": true,
+    "bankai_unlocked": false,
+    "shikai_progress": 100,
+    "bankai_progress": 40,
+    "shikai_tasks": [
+      "Build 1 AI app",
+      "Use semantic search",
+      "Use Whisper API"
+    ],
+    "bankai_tasks": [
+      "Create AI Lawyer project",
+      "Integrate 3+ tools",
+      "Handle large input"
+    ],
+    "notes": ""
+  },
+  {
+    "name": "Kōdo Rinkai",
+    "kanji": "コード臨界",
+    "domain": "Full-Stack Engineering",
+    "release_command": "Ignite the devnet… Kōdo Rinkai!",
+    "power": "Generates scalable UIs, connects databases, and automates deploys.",
+    "shikai_unlocked": false,
+    "bankai_unlocked": false,
+    "shikai_progress": 0,
+    "bankai_progress": 0,
+    "shikai_tasks": [
+      "Build React dashboard",
+      "Connect API",
+      "Deploy to Netlify"
+    ],
+    "bankai_tasks": [
+      "CI/CD pipeline",
+      "Monorepo for projects",
+      "Hybrid AI integration"
+    ],
+    "notes": ""
+  },
+  {
+    "name": "Kikai Meiun",
+    "kanji": "機械命運",
+    "domain": "Automation / Tools",
+    "release_command": "Flow into infinity… Kikai Meiun!",
+    "power": "Creates bots, scripts, and background systems that automate complex workflows.",
+    "shikai_unlocked": false,
+    "bankai_unlocked": false,
+    "shikai_progress": 0,
+    "bankai_progress": 0,
+    "shikai_tasks": [
+      "Build a CLI tool",
+      "Use cron jobs",
+      "Script data pipelines"
+    ],
+    "bankai_tasks": [
+      "Autonomous multi-tool bot",
+      "Streamlit + CLI sync",
+      "Self-updating agent"
+    ],
+    "notes": ""
+  },
+  {
+    "name": "Gensō Kōzō",
+    "kanji": "幻想構造",
+    "domain": "Data Engineering",
+    "release_command": "Shape the river of flow… Gensō Kōzō!",
+    "power": "Extracts, transforms, and loads massive data into structured systems.",
+    "shikai_unlocked": false,
+    "bankai_unlocked": false,
+    "shikai_progress": 0,
+    "bankai_progress": 0,
+    "shikai_tasks": [
+      "ETL pipeline",
+      "Pandas + SQL merge",
+      "Visualize with Plotly"
+    ],
+    "bankai_tasks": [
+      "Real-time streaming",
+      "Batch + incremental sync",
+      "Data contracts"
+    ],
+    "notes": ""
+  },
+  {
+    "name": "Meikō Jikan",
+    "kanji": "冥光時間",
+    "domain": "Time Management / Systems",
+    "release_command": "Command the hours… Meikō Jikan!",
+    "power": "Manages goals, schedules, and productivity in structured systems.",
+    "shikai_unlocked": false,
+    "bankai_unlocked": false,
+    "shikai_progress": 0,
+    "bankai_progress": 0,
+    "shikai_tasks": [
+      "Create productivity planner",
+      "Automated journal",
+      "Pomodoro bot"
+    ],
+    "bankai_tasks": [
+      "Integrated system (Notion/API)",
+      "Time-aware AI scheduler",
+      "Log analyzer"
+    ],
+    "notes": ""
+  },
+  {
+    "name": "Sokumen Seigyō",
+    "kanji": "側面制御",
+    "domain": "Problem Solving / Logic",
+    "release_command": "See all paths… Sokumen Seigyō!",
+    "power": "Understands problems deeply, splits them, and finds optimal solutions.",
+    "shikai_unlocked": false,
+    "bankai_unlocked": false,
+    "shikai_progress": 0,
+    "bankai_progress": 0,
+    "shikai_tasks": [
+      "Solve a tough logic bug",
+      "Build a math visualizer",
+      "Code debugger"
+    ],
+    "bankai_tasks": [
+      "Problem-solving AI assistant",
+      "Auto-refactor tool",
+      "Recursive code model"
+    ],
+    "notes": ""
+  },
+  {
+    "name": "Gōkon Shisō",
+    "kanji": "合魂思想",
+    "domain": "AI Tool Integration",
+    "release_command": "Fuse all minds… Gōkon Shisō!",
+    "power": "Integrates multiple AI models & APIs into one hybrid power system.",
+    "shikai_unlocked": false,
+    "bankai_unlocked": false,
+    "shikai_progress": 0,
+    "bankai_progress": 0,
+    "shikai_tasks": [
+      "Merge 2 AI tools",
+      "Use OpenAI + Huggingface",
+      "Tool chaining"
+    ],
+    "bankai_tasks": [
+      "Full-stack AI suite",
+      "Modular AI system",
+      "Voice + vision fusion"
+    ],
+    "notes": ""
+  },
+  {
+    "name": "Kagami Ryōiki",
+    "kanji": "鏡領域",
+    "domain": "Cloud + Data Science",
+    "release_command": "Reflect the real… Kagami Ryōiki!",
+    "power": "Builds scalable models and deploys them across cloud services.",
+    "shikai_unlocked": false,
+    "bankai_unlocked": false,
+    "shikai_progress": 0,
+    "bankai_progress": 0,
+    "shikai_tasks": [
+      "Train 1 model",
+      "Use Streamlit for results",
+      "Deploy to Render"
+    ],
+    "bankai_tasks": [
+      "Cloud model + monitoring",
+      "Realtime ML in cloud",
+      "Model auto-updater"
+    ],
+    "notes": ""
+  }
+]
