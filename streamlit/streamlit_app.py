@@ -246,7 +246,7 @@ elif page == "Summary Page":
         with col2: progress_bar("bankai", z.get("bankai_progress", 0))
         with col3: progress_bar("dangai", z.get("dangai_progress", 0))
 
-
+# 🔐 Admin Login System
 if "admin_authenticated" not in st.session_state:
     st.session_state.admin_authenticated = False
 
@@ -257,16 +257,18 @@ if page == "Admin Stats" and not st.session_state.admin_authenticated:
         if password_input == ADMIN_PASSWORD:
             st.success("Access granted! Welcome, Captain.")
             st.session_state.admin_authenticated = True
+            st.experimental_rerun()
         else:
             st.error("Wrong password. Access denied.")
-    st.stop()
+            st.rerun()
 
+# === Admin Page UI ===
 elif page == "Admin Stats":
-    # Your existing admin page logic here (with progress bars, unlocks, tasks etc.)    st.markdown("<h1 style='color:#FFD700;'>🧙‍♂️ Admin Zanpakutō Stats</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='color:#FFD700;'>🧙‍♂️ Admin Zanpakutō Stats</h1>", unsafe_allow_html=True)
     st.markdown("---")
 
     for z_idx, z in enumerate(data):
-        # Unique key using index and name
+        # Create unique key prefix using index and name
         zan_key = f"{z_idx}_" + re.sub(r'\W+', '_', z["name"])
 
         with st.container():
@@ -321,6 +323,6 @@ elif page == "Admin Stats":
 
             st.markdown("---")
 
-    # Save updated data
+    # Save updated data after unlock toggles
     with open(DATA_FILE, "w") as f:
         json.dump(data, f, indent=2)
