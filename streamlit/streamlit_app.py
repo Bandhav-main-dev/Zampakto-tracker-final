@@ -28,7 +28,11 @@ def download_button(data):
 
 # === TOTAL TASK COUNT ===
 def count_completed_tasks(z):
-    return 15 - len(z["shikai_tasks"]) - len(z["bankai_tasks"]) - len(z["dangai_tasks"])
+    shikai_done = sum(1 for task in z["shikai_tasks"] if task.get("completed"))
+    bankai_done = sum(1 for task in z["bankai_tasks"] if task.get("completed"))
+    dangai_done = sum(1 for task in z["dangai_tasks"] if task.get("completed"))
+    return shikai_done + bankai_done + dangai_done
+
 
 # === GENERATE PRACTICE QUESTIONS ===
 def generate_practice_questions(zanpakuto_name, domain, num=3):
@@ -214,7 +218,10 @@ if page == "Zanpakutō Details":
 
 elif page == "Summary Page":
     st.title("📊 Zanpakutō Summary Overview")
-    for z in data:
+    selected_summary = st.selectbox("Select Zanpakutō for Summary View", zanpakuto_names)
+    z = next((z for z in data if z["name"] == selected_summary), None)
+
+    if z:
         st.markdown(f"### 🗡️ {z['name']} ({z['kanji']})")
         st.markdown(f"**Domain:** `{z['domain']}`")
         st.markdown(f"**Power:** {z['power']}")
@@ -223,12 +230,14 @@ elif page == "Summary Page":
         draw_gauge("Dangai", z['dangai_progress'])
         st.markdown("---")
 
+
 elif page == "Admin Stats":
     st.title("🗂️ Admin Dashboard")
-    total = 0
-    for z in data:
+    selected_admin = st.selectbox("Select Zanpakutō for Admin View", zanpakuto_names)
+    z = next((z for z in data if z["name"] == selected_admin), None)
+
+    if z:
         completed = count_completed_tasks(z)
-        total += completed
         st.markdown(f"🔹 {z['name']}: **{completed}/15** tasks completed")
-    st.markdown("---")
-    st.markdown(f"**Total Completed Tasks Across All Zanpakutōs:** {total}")
+        st.markdown(f"🧮 Progress - Shikai: {z['shikai_progress']}% | Bankai: {z['bankai_progress']}% | Dangai: {z['dangai_progress']}%")
+        st.markdown("---")
