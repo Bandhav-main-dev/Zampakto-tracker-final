@@ -247,7 +247,7 @@ elif page == "Admin Stats":
     reset_pass = st.text_input("Enter Admin Password to Reset:", type="password")
 
     if st.button("🗑️ Reset All Progress"):
-        if reset_pass == "bankai123":  # ← change this to your preferred password
+        if reset_pass == "Bankai7241":  # ← change this to your preferred password
             reset_zanpakuto_progress(data)
             save_data(data)
             st.success("✅ All progress has been reset!")
