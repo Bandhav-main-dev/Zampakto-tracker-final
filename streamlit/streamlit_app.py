@@ -225,9 +225,17 @@ elif page == "Summary Page":
         st.markdown(f"### 🗡️ {z['name']} ({z['kanji']})")
         st.markdown(f"**Domain:** `{z['domain']}`")
         st.markdown(f"**Power:** {z['power']}")
-        draw_gauge("Shikai", z['shikai_progress'])
-        draw_gauge("Bankai", z['bankai_progress'])
-        draw_gauge("Dangai", z['dangai_progress'])
+        st.markdown("### 🔥 Progress")
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            draw_gauge("Shikai", selected_summary['shikai_progress'])
+
+        with col2:
+            draw_gauge("Bankai", selected_summary['bankai_progress'])
+
+        with col3:
+            draw_gauge("Dangai", selected_summary['dangai_progress'])
         st.markdown("---")
 
 
