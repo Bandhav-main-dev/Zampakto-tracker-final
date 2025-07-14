@@ -5,31 +5,81 @@
     "domain": "AI / Machine Learning",
     "release_command": "Pierce reality… Shinjitsu Tenshō!",
     "power": "Unites APIs, semantic AI, and automation to build intelligent truth engines.",
-    "shikai_unlocked": false,
+    "shikai_unlocked": true,
     "bankai_unlocked": false,
     "dangai_unlocked": false,
-    "shikai_progress": 0,
+    "shikai_progress": 100,
     "bankai_progress": 0,
     "dangai_progress": 0,
+    "shikai_test_passed": true,
+    "bankai_test_passed": false,
+    "dangai_test_passed": false,
     "shikai_tasks": [
-      { "task": "Learn Python basics", "completed": false },
-      { "task": "Train a simple ML model", "completed": false },
-      { "task": "Understand supervised learning", "completed": false }
+      {
+        "task": "Understand basics of supervised vs unsupervised learning",
+        "completed": true
+      },
+      {
+        "task": "Implement linear regression with scikit-learn",
+        "completed": true
+      },
+      {
+        "task": "Train a classification model using decision trees",
+        "completed": true
+      },
+      {
+        "task": "Visualize model accuracy with matplotlib",
+        "completed": true
+      },
+      {
+        "task": "Explore vector embeddings with Sentence Transformers",
+        "completed": true
+      }
     ],
     "bankai_tasks": [
-      { "task": "Build semantic search with FAISS + SBERT", "completed": false },
-      { "task": "Use HuggingFace transformers", "completed": false },
-      { "task": "Deploy ML model using Streamlit", "completed": false }
+      {
+        "task": "Build semantic search with FAISS + SBERT",
+        "completed": false
+      },
+      {
+        "task": "Use HuggingFace transformers",
+        "completed": false
+      },
+      {
+        "task": "Deploy ML model using Streamlit",
+        "completed": false
+      }
     ],
     "dangai_tasks": [
-      { "task": "Design an AI Lawyer app", "completed": false },
-      { "task": "Integrate OpenAI API", "completed": false },
-      { "task": "Blog on advanced ML applications", "completed": false }
+      {
+        "task": "Design an AI Lawyer app",
+        "completed": false
+      },
+      {
+        "task": "Integrate OpenAI API",
+        "completed": false
+      },
+      {
+        "task": "Blog on advanced ML applications",
+        "completed": false
+      }
     ],
-    "shikai_test_question": ["What is supervised learning?", "Define overfitting."],
-    "bankai_test_question": ["Explain vector similarity in semantic search.", "How does BERT model understand context?"],
-    "dangai_test_question": ["Outline an AI architecture using FAISS + Flask.", "What are the risks of generative AI in law?"],
-    "practise_test_question": ["Difference between precision and recall?", "When to use logistic regression over SVM?"],
+    "shikai_test_question": [
+      "What is supervised learning?",
+      "Define overfitting."
+    ],
+    "bankai_test_question": [
+      "Explain vector similarity in semantic search.",
+      "How does BERT model understand context?"
+    ],
+    "dangai_test_question": [
+      "Outline an AI architecture using FAISS + Flask.",
+      "What are the risks of generative AI in law?"
+    ],
+    "practise_test_question": [
+      "Difference between precision and recall?",
+      "When to use logistic regression over SVM?"
+    ],
     "notes": "Focus on semantic AI, model deployment, and automation."
   },
   {
@@ -44,25 +94,75 @@
     "shikai_progress": 0,
     "bankai_progress": 0,
     "dangai_progress": 0,
+    "shikai_test_passed": false,
+    "bankai_test_passed": false,
+    "dangai_test_passed": false,
     "shikai_tasks": [
-      { "task": "Build a basic Flask app", "completed": false },
-      { "task": "Create a REST API", "completed": false },
-      { "task": "Learn HTML/CSS basics", "completed": false }
+      {
+        "task": "Set up Flask and run a basic app",
+        "completed": false
+      },
+      {
+        "task": "Build a simple REST API (GET/POST)",
+        "completed": false
+      },
+      {
+        "task": "Create a static frontend with HTML/CSS",
+        "completed": false
+      },
+      {
+        "task": "Use JavaScript to interact with backend",
+        "completed": false
+      },
+      {
+        "task": "Deploy app locally using Flask dev server",
+        "completed": false
+      }
     ],
     "bankai_tasks": [
-      { "task": "Build full-stack app with React + Flask", "completed": false },
-      { "task": "Connect PostgreSQL and deploy", "completed": false },
-      { "task": "Add JWT Auth to app", "completed": false }
+      {
+        "task": "Build full-stack app with React + Flask",
+        "completed": false
+      },
+      {
+        "task": "Connect PostgreSQL and deploy",
+        "completed": false
+      },
+      {
+        "task": "Add JWT Auth to app",
+        "completed": false
+      }
     ],
     "dangai_tasks": [
-      { "task": "CI/CD with GitHub Actions", "completed": false },
-      { "task": "Dockerize full project", "completed": false },
-      { "task": "Set up domain on Render or Netlify", "completed": false }
+      {
+        "task": "CI/CD with GitHub Actions",
+        "completed": false
+      },
+      {
+        "task": "Dockerize full project",
+        "completed": false
+      },
+      {
+        "task": "Set up domain on Render or Netlify",
+        "completed": false
+      }
     ],
-    "shikai_test_question": ["What is the role of a backend?", "What does REST mean?"],
-    "bankai_test_question": ["Explain CRUD operations in REST.", "How do React hooks work?"],
-    "dangai_test_question": ["Steps to deploy a full-stack app to the cloud?", "What is containerization and why is Docker used?"],
-    "practise_test_question": ["What is CORS and how to fix it?", "Difference between SQL and NoSQL?"],
+    "shikai_test_question": [
+      "What is the role of a backend?",
+      "What does REST mean?"
+    ],
+    "bankai_test_question": [
+      "Explain CRUD operations in REST.",
+      "How do React hooks work?"
+    ],
+    "dangai_test_question": [
+      "Steps to deploy a full-stack app to the cloud?",
+      "What is containerization and why is Docker used?"
+    ],
+    "practise_test_question": [
+      "What is CORS and how to fix it?",
+      "Difference between SQL and NoSQL?"
+    ],
     "notes": "Master full-stack flow and deployment pipelines."
   },
   {
@@ -77,25 +177,67 @@
     "shikai_progress": 0,
     "bankai_progress": 0,
     "dangai_progress": 0,
+    "shikai_test_passed": false,
+    "bankai_test_passed": false,
+    "dangai_test_passed": false,
     "shikai_tasks": [
-      { "task": "Write basic Python scripts", "completed": false },
-      { "task": "Automate a file renaming task", "completed": false },
-      { "task": "Use cron to run scheduled jobs", "completed": false }
+      {
+        "task": "Write basic Python scripts",
+        "completed": false
+      },
+      {
+        "task": "Automate a file renaming task",
+        "completed": false
+      },
+      {
+        "task": "Use cron to run scheduled jobs",
+        "completed": false
+      }
     ],
     "bankai_tasks": [
-      { "task": "Build a CLI tool with argparse", "completed": false },
-      { "task": "Use Selenium or Puppeteer", "completed": false },
-      { "task": "Integrate with Slack or Telegram bot", "completed": false }
+      {
+        "task": "Build a CLI tool with argparse",
+        "completed": false
+      },
+      {
+        "task": "Use Selenium or Puppeteer",
+        "completed": false
+      },
+      {
+        "task": "Integrate with Slack or Telegram bot",
+        "completed": false
+      }
     ],
     "dangai_tasks": [
-      { "task": "Create a workflow system using Python + SQLite", "completed": false },
-      { "task": "Build auto-report generator", "completed": false },
-      { "task": "Chain tools using shell + Python", "completed": false }
+      {
+        "task": "Create a workflow system using Python + SQLite",
+        "completed": false
+      },
+      {
+        "task": "Build auto-report generator",
+        "completed": false
+      },
+      {
+        "task": "Chain tools using shell + Python",
+        "completed": false
+      }
     ],
-    "shikai_test_question": ["What is scripting?", "How does cron scheduling work?"],
-    "bankai_test_question": ["Explain headless browser automation.", "What are common CLI tool use-cases?"],
-    "dangai_test_question": ["Describe how to automate a weekly report system.", "Why is logging important in automation?"],
-    "practise_test_question": ["What are daemon/background tasks?", "Use cases for watchdog or observer patterns?"],
+    "shikai_test_question": [
+      "What is scripting?",
+      "How does cron scheduling work?"
+    ],
+    "bankai_test_question": [
+      "Explain headless browser automation.",
+      "What are common CLI tool use-cases?"
+    ],
+    "dangai_test_question": [
+      "Describe how to automate a weekly report system.",
+      "Why is logging important in automation?"
+    ],
+    "practise_test_question": [
+      "What are daemon/background tasks?",
+      "Use cases for watchdog or observer patterns?"
+    ],
     "notes": "Focus on tools that reduce human repetitive work."
   },
   {
@@ -110,158 +252,367 @@
     "shikai_progress": 0,
     "bankai_progress": 0,
     "dangai_progress": 0,
+    "shikai_test_passed": false,
+    "bankai_test_passed": false,
+    "dangai_test_passed": false,
     "shikai_tasks": [
-      { "task": "Understand CSV, JSON, and basic Pandas", "completed": false },
-      { "task": "Clean messy datasets", "completed": false },
-      { "task": "Use groupby and filtering", "completed": false }
+      {
+        "task": "Understand CSV, JSON, and basic Pandas",
+        "completed": false
+      },
+      {
+        "task": "Clean messy datasets",
+        "completed": false
+      },
+      {
+        "task": "Use groupby and filtering",
+        "completed": false
+      }
     ],
     "bankai_tasks": [
-      { "task": "Build ETL pipeline in Python", "completed": false },
-      { "task": "Write SQL queries for joins", "completed": false },
-      { "task": "Use Apache Airflow basics", "completed": false }
+      {
+        "task": "Build ETL pipeline in Python",
+        "completed": false
+      },
+      {
+        "task": "Write SQL queries for joins",
+        "completed": false
+      },
+      {
+        "task": "Use Apache Airflow basics",
+        "completed": false
+      }
     ],
     "dangai_tasks": [
-      { "task": "Stream large data using Spark or Dask", "completed": false },
-      { "task": "Design a mini-data warehouse", "completed": false },
-      { "task": "Automate ETL with Airflow + API", "completed": false }
+      {
+        "task": "Stream large data using Spark or Dask",
+        "completed": false
+      },
+      {
+        "task": "Design a mini-data warehouse",
+        "completed": false
+      },
+      {
+        "task": "Automate ETL with Airflow + API",
+        "completed": false
+      }
     ],
-    "shikai_test_question": ["What is data cleaning?", "How does Pandas handle NaNs?"],
-    "bankai_test_question": ["What is the difference between INNER and LEFT JOIN?", "How to automate ETL with Python?"],
-    "dangai_test_question": ["Design a scalable data pipeline using Python and Spark.", "Explain DAG in Airflow."],
-    "practise_test_question": ["What is schema in databases?", "Why normalization is important?"],
+    "shikai_test_question": [
+      "What is data cleaning?",
+      "How does Pandas handle NaNs?"
+    ],
+    "bankai_test_question": [
+      "What is the difference between INNER and LEFT JOIN?",
+      "How to automate ETL with Python?"
+    ],
+    "dangai_test_question": [
+      "Design a scalable data pipeline using Python and Spark.",
+      "Explain DAG in Airflow."
+    ],
+    "practise_test_question": [
+      "What is schema in databases?",
+      "Why normalization is important?"
+    ],
     "notes": "Prioritize efficient data pipelines and scalability."
+  },
+  {
+    "name": "Meikō Jikan",
+    "kanji": "冥光時間",
+    "domain": "Time Management / Systems",
+    "release_command": "Command the hours… Meikō Jikan!",
+    "power": "Manages goals, schedules, and productivity in structured systems.",
+    "shikai_unlocked": false,
+    "bankai_unlocked": false,
+    "dangai_unlocked": false,
+    "shikai_progress": 0,
+    "bankai_progress": 0,
+    "dangai_progress": 0,
+    "shikai_test_passed": false,
+    "bankai_test_passed": false,
+    "dangai_test_passed": false,
+    "shikai_tasks": [
+      {
+        "task": "Track daily tasks using Notion",
+        "completed": false
+      },
+      {
+        "task": "Use Pomodoro timer",
+        "completed": false
+      },
+      {
+        "task": "Define weekly goals",
+        "completed": false
+      }
+    ],
+    "bankai_tasks": [
+      {
+        "task": "Build your own planner using Flask",
+        "completed": false
+      },
+      {
+        "task": "Track habits in database",
+        "completed": false
+      },
+      {
+        "task": "Analyze time usage with charts",
+        "completed": false
+      }
+    ],
+    "dangai_tasks": [
+      {
+        "task": "Integrate Google Calendar API",
+        "completed": false
+      },
+      {
+        "task": "Design system for work + break balance",
+        "completed": false
+      },
+      {
+        "task": "Train AI to prioritize tasks based on urgency",
+        "completed": false
+      }
+    ],
+    "shikai_test_question": [
+      "What is time blocking?",
+      "Why do people procrastinate?"
+    ],
+    "bankai_test_question": [
+      "Design a basic planner schema.",
+      "How to use habit tracking for productivity?"
+    ],
+    "dangai_test_question": [
+      "Describe an AI-powered time management assistant.",
+      "How to automate prioritization of tasks?"
+    ],
+    "practise_test_question": [
+      "What is Eisenhower matrix?",
+      "Difference between schedule and routine?"
+    ],
+    "notes": "Focus on building real, automated systems for managing time."
+  },
+  {
+    "name": "Sokumen Seigyō",
+    "kanji": "側面制御",
+    "domain": "Problem Solving / Logic",
+    "release_command": "See all paths… Sokumen Seigyō!",
+    "power": "Understands problems deeply, splits them, and finds optimal solutions.",
+    "shikai_unlocked": false,
+    "bankai_unlocked": false,
+    "dangai_unlocked": false,
+    "shikai_progress": 0,
+    "bankai_progress": 0,
+    "dangai_progress": 0,
+    "shikai_test_passed": false,
+    "bankai_test_passed": false,
+    "dangai_test_passed": false,
+    "shikai_tasks": [
+      {
+        "task": "Solve 5 Python logic puzzles",
+        "completed": false
+      },
+      {
+        "task": "Understand recursion and iteration",
+        "completed": false
+      },
+      {
+        "task": "Learn flowcharting basics",
+        "completed": false
+      }
+    ],
+    "bankai_tasks": [
+      {
+        "task": "Design problem trees for real-world problems",
+        "completed": false
+      },
+      {
+        "task": "Implement dynamic programming problems",
+        "completed": false
+      },
+      {
+        "task": "Master 2 coding platforms like LeetCode or HackerRank",
+        "completed": false
+      }
+    ],
+    "dangai_tasks": [
+      {
+        "task": "Create your own problem and 3 solutions",
+        "completed": false
+      },
+      {
+        "task": "Design a strategy for debugging in real-time",
+        "completed": false
+      },
+      {
+        "task": "Automate logic test cases for an app",
+        "completed": false
+      }
+    ],
+    "shikai_test_question": [
+      "What is recursion?",
+      "Difference between loop and recursion?"
+    ],
+    "bankai_test_question": [
+      "How does memoization improve performance?",
+      "Why is breaking problem important before coding?"
+    ],
+    "dangai_test_question": [
+      "Design a debugging assistant for logic errors.",
+      "How to architect logic trees for planning?"
+    ],
+    "practise_test_question": [
+      "What is divide and conquer?",
+      "Explain base case in recursion."
+    ],
+    "notes": "Train logical clarity through patterns and problem breakdown."
+  },
+  {
+    "name": "Gōkon Shisō",
+    "kanji": "合魂思想",
+    "domain": "AI Tool Integration",
+    "release_command": "Fuse all minds… Gōkon Shisō!",
+    "power": "Integrates multiple AI models & APIs into one hybrid power system.",
+    "shikai_unlocked": false,
+    "bankai_unlocked": false,
+    "dangai_unlocked": false,
+    "shikai_progress": 0,
+    "bankai_progress": 0,
+    "dangai_progress": 0,
+    "shikai_test_passed": false,
+    "bankai_test_passed": false,
+    "dangai_test_passed": false,
+    "shikai_tasks": [
+      {
+        "task": "Use OpenAI API to call a chatbot",
+        "completed": false
+      },
+      {
+        "task": "Chain GPT with Whisper (STT)",
+        "completed": false
+      },
+      {
+        "task": "Generate output from Gemini and compare",
+        "completed": false
+      }
+    ],
+    "bankai_tasks": [
+      {
+        "task": "Integrate 3 tools (e.g. Gemini + Whisper + LangChain)",
+        "completed": false
+      },
+      {
+        "task": "Create app that takes voice input & gives AI output",
+        "completed": false
+      },
+      {
+        "task": "Build custom AI interface using Flask",
+        "completed": false
+      }
+    ],
+    "dangai_tasks": [
+      {
+        "task": "Design a hybrid model with multiple API calls",
+        "completed": false
+      },
+      {
+        "task": "Optimize latency for response",
+        "completed": false
+      },
+      {
+        "task": "Write doc for integrated AI workflow",
+        "completed": false
+      }
+    ],
+    "shikai_test_question": [
+      "What is prompt chaining?",
+      "Difference between Whisper and Gemini?"
+    ],
+    "bankai_test_question": [
+      "How to manage multiple API outputs?",
+      "Explain hybrid AI systems."
+    ],
+    "dangai_test_question": [
+      "Design a full AI stack for an interactive assistant.",
+      "How to log and trace cross-tool workflows?"
+    ],
+    "practise_test_question": [
+      "What are limitations of tool chaining?",
+      "How to choose right model per task?"
+    ],
+    "notes": "Merge APIs to create smooth intelligent tools."
+  },
+  {
+    "name": "Kagami Ryōiki",
+    "kanji": "鏡領域",
+    "domain": "Cloud + Data Science",
+    "release_command": "Reflect the real… Kagami Ryōiki!",
+    "power": "Builds scalable models and deploys them across cloud services.",
+    "shikai_unlocked": false,
+    "bankai_unlocked": false,
+    "dangai_unlocked": false,
+    "shikai_progress": 0,
+    "bankai_progress": 0,
+    "dangai_progress": 0,
+    "shikai_test_passed": false,
+    "bankai_test_passed": false,
+    "dangai_test_passed": false,
+    "shikai_tasks": [
+      {
+        "task": "Train a data model with scikit-learn",
+        "completed": false
+      },
+      {
+        "task": "Use Colab for GPU training",
+        "completed": false
+      },
+      {
+        "task": "Understand basic cloud terms",
+        "completed": false
+      }
+    ],
+    "bankai_tasks": [
+      {
+        "task": "Deploy model on Render or HuggingFace",
+        "completed": false
+      },
+      {
+        "task": "Use Firebase or PostgreSQL in cloud",
+        "completed": false
+      },
+      {
+        "task": "Create API endpoint for prediction",
+        "completed": false
+      }
+    ],
+    "dangai_tasks": [
+      {
+        "task": "Set up scalable cloud infra with Docker",
+        "completed": false
+      },
+      {
+        "task": "Auto-update model on cloud",
+        "completed": false
+      },
+      {
+        "task": "Add monitoring and logging tools",
+        "completed": false
+      }
+    ],
+    "shikai_test_question": [
+      "What is overfitting?",
+      "Difference between CPU and GPU for ML?"
+    ],
+    "bankai_test_question": [
+      "Steps to deploy model in cloud?",
+      "What is a model endpoint?"
+    ],
+    "dangai_test_question": [
+      "Design auto-scaling ML app in cloud.",
+      "Explain docker-compose for ML project."
+    ],
+    "practise_test_question": [
+      "What is latency?",
+      "What tools monitor cloud performance?"
+    ],
+    "notes": "Think scale and automation. Deploy your intelligence."
   }
-,
-{
-  "name": "Meikō Jikan",
-  "kanji": "冥光時間",
-  "domain": "Time Management / Systems",
-  "release_command": "Command the hours… Meikō Jikan!",
-  "power": "Manages goals, schedules, and productivity in structured systems.",
-  "shikai_unlocked": false,
-  "bankai_unlocked": false,
-  "dangai_unlocked": false,
-  "shikai_progress": 0,
-  "bankai_progress": 0,
-  "dangai_progress": 0,
-  "shikai_tasks": [
-    { "task": "Track daily tasks using Notion", "completed": false },
-    { "task": "Use Pomodoro timer", "completed": false },
-    { "task": "Define weekly goals", "completed": false }
-  ],
-  "bankai_tasks": [
-    { "task": "Build your own planner using Flask", "completed": false },
-    { "task": "Track habits in database", "completed": false },
-    { "task": "Analyze time usage with charts", "completed": false }
-  ],
-  "dangai_tasks": [
-    { "task": "Integrate Google Calendar API", "completed": false },
-    { "task": "Design system for work + break balance", "completed": false },
-    { "task": "Train AI to prioritize tasks based on urgency", "completed": false }
-  ],
-  "shikai_test_question": ["What is time blocking?", "Why do people procrastinate?"],
-  "bankai_test_question": ["Design a basic planner schema.", "How to use habit tracking for productivity?"],
-  "dangai_test_question": ["Describe an AI-powered time management assistant.", "How to automate prioritization of tasks?"],
-  "practise_test_question": ["What is Eisenhower matrix?", "Difference between schedule and routine?"],
-  "notes": "Focus on building real, automated systems for managing time."
-},
-{
-  "name": "Sokumen Seigyō",
-  "kanji": "側面制御",
-  "domain": "Problem Solving / Logic",
-  "release_command": "See all paths… Sokumen Seigyō!",
-  "power": "Understands problems deeply, splits them, and finds optimal solutions.",
-  "shikai_unlocked": false,
-  "bankai_unlocked": false,
-  "dangai_unlocked": false,
-  "shikai_progress": 0,
-  "bankai_progress": 0,
-  "dangai_progress": 0,
-  "shikai_tasks": [
-    { "task": "Solve 5 Python logic puzzles", "completed": false },
-    { "task": "Understand recursion and iteration", "completed": false },
-    { "task": "Learn flowcharting basics", "completed": false }
-  ],
-  "bankai_tasks": [
-    { "task": "Design problem trees for real-world problems", "completed": false },
-    { "task": "Implement dynamic programming problems", "completed": false },
-    { "task": "Master 2 coding platforms like LeetCode or HackerRank", "completed": false }
-  ],
-  "dangai_tasks": [
-    { "task": "Create your own problem and 3 solutions", "completed": false },
-    { "task": "Design a strategy for debugging in real-time", "completed": false },
-    { "task": "Automate logic test cases for an app", "completed": false }
-  ],
-  "shikai_test_question": ["What is recursion?", "Difference between loop and recursion?"],
-  "bankai_test_question": ["How does memoization improve performance?", "Why is breaking problem important before coding?"],
-  "dangai_test_question": ["Design a debugging assistant for logic errors.", "How to architect logic trees for planning?"],
-  "practise_test_question": ["What is divide and conquer?", "Explain base case in recursion."],
-  "notes": "Train logical clarity through patterns and problem breakdown."
-},
-{
-  "name": "Gōkon Shisō",
-  "kanji": "合魂思想",
-  "domain": "AI Tool Integration",
-  "release_command": "Fuse all minds… Gōkon Shisō!",
-  "power": "Integrates multiple AI models & APIs into one hybrid power system.",
-  "shikai_unlocked": false,
-  "bankai_unlocked": false,
-  "dangai_unlocked": false,
-  "shikai_progress": 0,
-  "bankai_progress": 0,
-  "dangai_progress": 0,
-  "shikai_tasks": [
-    { "task": "Use OpenAI API to call a chatbot", "completed": false },
-    { "task": "Chain GPT with Whisper (STT)", "completed": false },
-    { "task": "Generate output from Gemini and compare", "completed": false }
-  ],
-  "bankai_tasks": [
-    { "task": "Integrate 3 tools (e.g. Gemini + Whisper + LangChain)", "completed": false },
-    { "task": "Create app that takes voice input & gives AI output", "completed": false },
-    { "task": "Build custom AI interface using Flask", "completed": false }
-  ],
-  "dangai_tasks": [
-    { "task": "Design a hybrid model with multiple API calls", "completed": false },
-    { "task": "Optimize latency for response", "completed": false },
-    { "task": "Write doc for integrated AI workflow", "completed": false }
-  ],
-  "shikai_test_question": ["What is prompt chaining?", "Difference between Whisper and Gemini?"],
-  "bankai_test_question": ["How to manage multiple API outputs?", "Explain hybrid AI systems."],
-  "dangai_test_question": ["Design a full AI stack for an interactive assistant.", "How to log and trace cross-tool workflows?"],
-  "practise_test_question": ["What are limitations of tool chaining?", "How to choose right model per task?"],
-  "notes": "Merge APIs to create smooth intelligent tools."
-},
-{
-  "name": "Kagami Ryōiki",
-  "kanji": "鏡領域",
-  "domain": "Cloud + Data Science",
-  "release_command": "Reflect the real… Kagami Ryōiki!",
-  "power": "Builds scalable models and deploys them across cloud services.",
-  "shikai_unlocked": false,
-  "bankai_unlocked": false,
-  "dangai_unlocked": false,
-  "shikai_progress": 0,
-  "bankai_progress": 0,
-  "dangai_progress": 0,
-  "shikai_tasks": [
-    { "task": "Train a data model with scikit-learn", "completed": false },
-    { "task": "Use Colab for GPU training", "completed": false },
-    { "task": "Understand basic cloud terms", "completed": false }
-  ],
-  "bankai_tasks": [
-    { "task": "Deploy model on Render or HuggingFace", "completed": false },
-    { "task": "Use Firebase or PostgreSQL in cloud", "completed": false },
-    { "task": "Create API endpoint for prediction", "completed": false }
-  ],
-  "dangai_tasks": [
-    { "task": "Set up scalable cloud infra with Docker", "completed": false },
-    { "task": "Auto-update model on cloud", "completed": false },
-    { "task": "Add monitoring and logging tools", "completed": false }
-  ],
-  "shikai_test_question": ["What is overfitting?", "Difference between CPU and GPU for ML?"],
-  "bankai_test_question": ["Steps to deploy model in cloud?", "What is a model endpoint?"],
-  "dangai_test_question": ["Design auto-scaling ML app in cloud.", "Explain docker-compose for ML project."],
-  "practise_test_question": ["What is latency?", "What tools monitor cloud performance?"],
-  "notes": "Think scale and automation. Deploy your intelligence."
-}
 ]
