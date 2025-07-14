@@ -8,93 +8,90 @@ st.set_page_config(page_title="Zanpakutō Tracker", layout="wide")
 
 # === CONFIG ===
 DATA_FILE = os.path.join(os.path.dirname(__file__), "zanpakuto_data.json")
-GOOGLE_API_KEY = "YOUR_API_KEY"
+GOOGLE_API_KEY = "AIzaSyDsiipSZorPJHovyDHLb86XXBx-aYipAMM"
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel("models/gemini-2.0-flash")
 
-# === BLEACH THEME CSS + GOLDEN UI UPGRADE ===
+# === BLEACH THEME CSS + ANIMATION ===
 st.markdown("""
 <style>
-/* ===== Global Styling ===== */
-body {
-    background-color: #000000;
-    color: #f1f1f1;
-    font-family: 'Cinzel', serif;
-}
+body { background-color: #0a0a0a; color: #f1f1f1; }
 
-/* ===== Headings ===== */
-h1, h2, h3, h4 {
-    color: #FFD700;
-    font-weight: bold;
-    text-shadow: 0 0 5px #FFD70088;
-}
+h1,h2,h3,h4 { color: #ffd700; font-weight: bold; }
 
-/* ===== Buttons ===== */
 .stButton button {
-    background-color: #111111;
-    color: #FFD700;
-    border: 1px solid #FFD700;
-    border-radius: 8px;
-    padding: 0.5em 1.2em;
-    font-weight: bold;
-    transition: all 0.3s ease;
+    background-color: #ef4444; color: white;
+    border: none; border-radius: 8px;
+    padding: 0.5em 1.2em; font-weight: bold;
 }
 .stButton button:hover {
-    background-color: #FFD700;
-    color: black;
+    background-color: #facc15; color: black;
 }
 
-/* ===== Text Areas and Inputs ===== */
 textarea, input {
-    background-color: #0d0d0d;
-    color: #ffffff;
-    border: 1px solid #FFD700;
-    border-radius: 6px;
+    background-color: #1f1f1f; color: white;
+    border: 1px solid #ffd700; border-radius: 6px;
 }
 
-/* ===== Panels ===== */
-.block-container {
-    background: #0a0a0a;
-    padding: 2em;
-    border-radius: 10px;
-    box-shadow: 0 0 15px #FFD70033;
+/* Sidebar dark background */
+section[data-testid="stSidebar"] {
+    background-color: #121212;
+    border-right: 1px solid #444;
 }
 
-/* ===== Scrollbars ===== */
-::-webkit-scrollbar {
-    width: 8px;
-}
-::-webkit-scrollbar-track {
-    background: #111;
-}
-::-webkit-scrollbar-thumb {
-    background-color: #FFD700;
-    border-radius: 6px;
-}
-            
-
-
-/* ===== Animations ===== */
 .spiritual-slash {
+    position: relative;
     text-align: center;
     font-size: 2em;
     font-weight: bold;
     color: #fff;
-    background: linear-gradient(90deg, #FFD700, #000, #FFD700);
+    background: linear-gradient(90deg, #ef4444, #facc15, #fff);
     padding: 1rem 2rem;
     margin: 1rem 0;
     border-radius: 12px;
-    box-shadow: 0 0 15px #FFD700;
+    box-shadow: 0 0 15px #facc15;
     animation: slashFlash 1s ease-out forwards;
 }
+
 @keyframes slashFlash {
     0% { opacity: 0; transform: scale(0.5) rotate(-15deg); filter: blur(4px); }
     50% { opacity: 1; transform: scale(1.2) rotate(3deg); filter: blur(0px); }
     100% { opacity: 1; transform: scale(1.0) rotate(0deg); }
 }
+
+@keyframes braveUnlock {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+        filter: brightness(0.4) blur(4px);
+    }
+    40% {
+        transform: scale(1.05);
+        opacity: 1;
+        filter: brightness(1.4) blur(0px);
+        border: 4px solid gold;
+        box-shadow: 0 0 40px gold;
+    }
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+}
+
+.brave-unlock {
+    font-size: 2.4rem;
+    text-align: center;
+    margin-top: 20px;
+    padding: 1.5rem 2rem;
+    color: #fff;
+    border: 3px solid #FFD700;
+    border-radius: 16px;
+    background: linear-gradient(90deg, #000000, #FFD70022, #000000);
+    box-shadow: 0 0 30px #FFD70066;
+    animation: braveUnlock 1.6s ease-out;
+}
 </style>
 """, unsafe_allow_html=True)
-
 
 # === LOAD / SAVE ===
 def load_data():
@@ -104,16 +101,6 @@ def load_data():
 def save_data(data):
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-
-# === REIATSU BURST EFFECT ===
-def reiatsu_burst(level):
-    colors = {
-        "shikai": "🟡",
-        "bankai": "🔴",
-        "dangai": "⚪"
-    }
-    emoji = colors.get(level.lower(), "✨")
-    st.markdown(f"#### {emoji*10} {level.upper()} UNLOCKED! {emoji*10}")
 
 # === PROGRESS BAR ===
 def progress_bar(label, percent):
@@ -144,6 +131,16 @@ def evaluate_answer(question, answer):
         return response.text.strip()
     except Exception as e:
         return f"❌ AI Error: {e}"
+
+# === UNLOCK EFFECT ===
+def reiatsu_burst(level):
+    emoji_map = {
+        "shikai": "🟡",
+        "bankai": "🔴",
+        "dangai": "⚪"
+    }
+    reiatsu = emoji_map.get(level.lower(), "✨")
+    st.markdown(f"#### {reiatsu * 20}")
 
 # === TASK HANDLER ===
 def handle_tasks(zanpakuto, level, data):
@@ -206,8 +203,8 @@ def handle_tasks(zanpakuto, level, data):
     if total_progress == 100 and not zanpakuto.get(unlocked_key):
         zanpakuto[unlocked_key] = True
         reiatsu_burst(level)
+        st.markdown(f'<div class="brave-unlock">🔥 {level.capitalize()} Awakened! 🔥</div>', unsafe_allow_html=True)
         st.markdown(f"##### 🗡️ \"_{zanpakuto['release_command']}_\"")
-        st.markdown(f"<div class=\"spiritual-slash\">{level.capitalize()} Unlocked!</div>", unsafe_allow_html=True)
         changed = True
 
     if changed:
