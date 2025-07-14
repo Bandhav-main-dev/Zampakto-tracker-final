@@ -171,6 +171,15 @@ def handle_tasks(zanpakuto, level, data):
 
     return total_progress, changed
 
+def reset_zanpakuto_progress(data):
+    for z in data:
+        for level in ["shikai", "bankai", "dangai"]:
+            z[f"{level}_unlocked"] = False
+            z[f"{level}_progress"] = 0
+            z[f"{level}_test_passed"] = False
+            for task in z.get(f"{level}_tasks", []):
+                task["completed"] = False
+
 # === MAIN LOGIC ===
 data = load_data()
 zanpakuto_names = [z["name"] for z in data]
@@ -232,3 +241,16 @@ elif page == "Admin Stats":
         st.markdown(f"🔹 {z['name']}: **{completed}** tasks completed")
     st.markdown("---")
     st.markdown(f"**📈 Total Completed Tasks Across All Zanpakutō: {total_completed}**")
+
+    st.markdown("## 🔄 Reset Zanpakutō Progress")
+
+    reset_pass = st.text_input("Enter Admin Password to Reset:", type="password")
+
+    if st.button("🗑️ Reset All Progress"):
+        if reset_pass == "bankai123":  # ← change this to your preferred password
+            reset_zanpakuto_progress(data)
+            save_data(data)
+            st.success("✅ All progress has been reset!")
+        else:
+            st.error("❌ Incorrect password.")
+
