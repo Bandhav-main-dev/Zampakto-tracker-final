@@ -1,2 +1,2 @@
 # config.py
-ADMIN_PASSWORD = "getsugatensho999"
+ADMIN_PASSWORD = "Bankai7241"
