@@ -2,6 +2,7 @@ import streamlit as st
 import json
 import os
 import google.generativeai as genai
+import re
 
 # === MUST BE FIRST ===
 st.set_page_config(page_title="Zanpakutō Tracker", layout="wide")
@@ -243,14 +244,14 @@ elif page == "Summary Page":
         with col1: progress_bar("shikai", z.get("shikai_progress", 0))
         with col2: progress_bar("bankai", z.get("bankai_progress", 0))
         with col3: progress_bar("dangai", z.get("dangai_progress", 0))
+
 elif page == "Admin Stats":
-    import re  # Make sure it's imported at the top
     st.markdown("<h1 style='color:#FFD700;'>🧙‍♂️ Admin Zanpakutō Stats</h1>", unsafe_allow_html=True)
     st.markdown("---")
 
     for z in data:
-        # Sanitize name to avoid duplicate keys
-        unique_id = re.sub(r'\W+', '_', z["name"])
+        # Clean name for safe key usage
+        zan_key = re.sub(r'\W+', '_', z["name"])
 
         with st.container():
             st.markdown(f"### 🗡️ {z['name']} ({z['domain']})")
@@ -262,26 +263,44 @@ elif page == "Admin Stats":
             cols[3].progress(z["bankai_progress"] / 100, text=f"{z['bankai_progress']}%")
 
             with st.expander("📜 View Tasks & Status"):
-                st.write("**Shikai Tasks:**")
+                st.subheader("Shikai Tasks")
                 for i, task in enumerate(z["shikai_tasks"]):
-                    st.checkbox(f"🔹 {task['task']}", value=task["completed"], disabled=True, key=f"{unique_id}_shikai_task_{i}")
-                
-                st.write("**Bankai Tasks:**")
-                for i, task in enumerate(z["bankai_tasks"]):
-                    st.checkbox(f"🔸 {task['task']}", value=task["completed"], disabled=True, key=f"{unique_id}_bankai_task_{i}")
+                    task_key = re.sub(r'\W+', '_', task['task'])[:40]
+                    st.checkbox(
+                        f"🔹 {task['task']}",
+                        value=task["completed"],
+                        disabled=True,
+                        key=f"{zan_key}_shikai_{i}_{task_key}"
+                    )
 
-                st.write("**Dangai Tasks:**")
+                st.subheader("Bankai Tasks")
+                for i, task in enumerate(z["bankai_tasks"]):
+                    task_key = re.sub(r'\W+', '_', task['task'])[:40]
+                    st.checkbox(
+                        f"🔸 {task['task']}",
+                        value=task["completed"],
+                        disabled=True,
+                        key=f"{zan_key}_bankai_{i}_{task_key}"
+                    )
+
+                st.subheader("Dangai Tasks")
                 for i, task in enumerate(z["dangai_tasks"]):
-                    st.checkbox(f"🔻 {task['task']}", value=task["completed"], disabled=True, key=f"{unique_id}_dangai_task_{i}")
+                    task_key = re.sub(r'\W+', '_', task['task'])[:40]
+                    st.checkbox(
+                        f"🔻 {task['task']}",
+                        value=task["completed"],
+                        disabled=True,
+                        key=f"{zan_key}_dangai_{i}_{task_key}"
+                    )
 
             with st.expander("🛠️ Admin Controls (Unlock Powers)"):
                 c1, c2, c3 = st.columns(3)
-                z["shikai_unlocked"] = c1.checkbox("Unlock Shikai", value=z["shikai_unlocked"], key=f"{unique_id}_unlock_shikai")
-                z["bankai_unlocked"] = c2.checkbox("Unlock Bankai", value=z["bankai_unlocked"], key=f"{unique_id}_unlock_bankai")
-                z["dangai_unlocked"] = c3.checkbox("Unlock Dangai", value=z["dangai_unlocked"], key=f"{unique_id}_unlock_dangai")
+                z["shikai_unlocked"] = c1.checkbox("Unlock Shikai", value=z["shikai_unlocked"], key=f"{zan_key}_unlock_shikai")
+                z["bankai_unlocked"] = c2.checkbox("Unlock Bankai", value=z["bankai_unlocked"], key=f"{zan_key}_unlock_bankai")
+                z["dangai_unlocked"] = c3.checkbox("Unlock Dangai", value=z["dangai_unlocked"], key=f"{zan_key}_unlock_dangai")
 
             st.markdown("---")
 
-    # Save after changes
+    # Save updates
     with open(DATA_FILE, "w") as f:
         json.dump(data, f, indent=2)
