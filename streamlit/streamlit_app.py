@@ -2,9 +2,10 @@ import streamlit as st
 import json
 import os
 import google.generativeai as genai
+from datetime import datetime
 
 # === CONFIG ===
-DATA_FILE = os.path.join(os.path.dirname(__file__), "zanpakuto_data.json")
+DATA_FILE = "/workspaces/Zampakto-tracker-final/streamlit/zanpakuto_data.json"
 GOOGLE_API_KEY = "AIzaSyBaBnQt9uGLo-C0lw-I2WvZ5mbLWxKVK_8"
 
 # === SETUP ===
@@ -19,6 +20,15 @@ def load_data():
 def save_data(data):
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
+# === EXPORT JSON ===
+def download_button(data):
+    json_str = json.dumps(data, ensure_ascii=False, indent=2)
+    st.download_button("💾 Download Progress JSON", json_str, file_name="zanpakuto_progress.json", mime="application/json")
+
+# === TOTAL TASK COUNT ===
+def count_completed_tasks(z):
+    return 15 - len(z["shikai_tasks"]) - len(z["bankai_tasks"]) - len(z["dangai_tasks"])
 
 # === GENERATE PRACTICE QUESTIONS ===
 def generate_practice_questions(zanpakuto_name, domain, num=3):
@@ -62,9 +72,14 @@ st.markdown("""
         background-color: #0f0f0f;
         color: #f1f1f1;
     }
-    meter {
+    .gauge-container {
+        width: 300px;
+        height: 150px;
+        margin: 20px auto;
+    }
+    .gauge {
         width: 100%;
-        height: 25px;
+        height: 100%;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -75,7 +90,19 @@ zanpakuto_names = [z["name"] for z in data]
 
 # === SIDEBAR ===
 st.sidebar.title("📜 Zanpakutō Navigation")
-page = st.sidebar.radio("Select View", ["Zanpakutō Details", "Summary Page"])
+page = st.sidebar.radio("Select View", ["Zanpakutō Details", "Summary Page", "Admin Stats"])
+
+# === SPEEDOMETER GAUGE ===
+def draw_gauge(label, percent):
+    st.markdown(f"""
+    <div class='gauge-container'>
+        <svg class='gauge' viewBox='0 0 100 50'>
+            <path d='M10,50 A40,40 0 0,1 90,50' fill='none' stroke='#333' stroke-width='5' />
+            <path d='M10,50 A40,40 0 {int(percent/50)},1 {10 + 80 * percent / 100},50' fill='none' stroke='#facc15' stroke-width='5' />
+        </svg>
+        <p style='text-align:center'>{label}: <strong>{percent}%</strong></p>
+    </div>
+    """, unsafe_allow_html=True)
 
 # === DETAIL PAGE ===
 if page == "Zanpakutō Details":
@@ -85,7 +112,7 @@ if page == "Zanpakutō Details":
     if selected_zanpakuto:
         st.markdown(f"""
             <h1 style='text-align: center; color: #ff4b4b;'>🗡️ {selected_zanpakuto['name']} ({selected_zanpakuto['kanji']})</h1>
-            <h4 style='text-align: center; color: #facc15;'>Domain: {selected_zanpakuto['domain']}</h4>
+            <h4 style='text-align: center; color: #facc15;'>Domain: {selected_zanpakuto['domain']} ({selected_zanpakuto.get('release_command', '')})</h4>
             <hr style='border: 1px solid #444;' />
         """, unsafe_allow_html=True)
 
@@ -94,22 +121,9 @@ if page == "Zanpakutō Details":
         st.markdown("---")
 
         st.markdown("### 🔥 Progress")
-        st.markdown(f"**Shikai (🟡):** {selected_zanpakuto['shikai_progress']}%")
-        st.markdown(f"""
-            <meter value="{selected_zanpakuto['shikai_progress']}" min="0" max="100">{selected_zanpakuto['shikai_progress']}%</meter>
-        """, unsafe_allow_html=True)
-
-        st.markdown(f"**Bankai (🔴):** {selected_zanpakuto['bankai_progress']}%")
-        st.markdown(f"""
-            <meter value="{selected_zanpakuto['bankai_progress']}" min="0" max="100">{selected_zanpakuto['bankai_progress']}%</meter>
-        """, unsafe_allow_html=True)
-
-        st.markdown(f"**Dangai (⚪):** {selected_zanpakuto['dangai_progress']}%")
-        st.markdown(f"""
-            <meter value="{selected_zanpakuto['dangai_progress']}" min="0" max="100">{selected_zanpakuto['dangai_progress']}%</meter>
-        """, unsafe_allow_html=True)
-
-        st.markdown("---")
+        draw_gauge("Shikai", selected_zanpakuto['shikai_progress'])
+        draw_gauge("Bankai", selected_zanpakuto['bankai_progress'])
+        draw_gauge("Dangai", selected_zanpakuto['dangai_progress'])
 
         # Shikai (Always visible)
         st.markdown("## 📋 Shikai Tasks")
@@ -117,10 +131,14 @@ if page == "Zanpakutō Details":
             if st.checkbox(f"{i+1}. {task}", key=f"shikai_{i}_{selected_zanpakuto['name']}"):
                 selected_zanpakuto["shikai_tasks"].pop(i)
                 selected_zanpakuto["shikai_progress"] = min(100, selected_zanpakuto["shikai_progress"] + 20)
+                if selected_zanpakuto["shikai_progress"] >= 100:
+                    selected_zanpakuto["shikai_unlocked"] = True
+                    st.balloons()
+                    st.success("🎉 Shikai Unlocked!")
                 save_data(data)
                 st.experimental_rerun()
 
-        if selected_zanpakuto["practise_test_question"]:
+        if selected_zanpakuto.get("practise_test_question"):
             st.markdown("## 🧪 Shikai Practice Questions")
             for i, q in enumerate(selected_zanpakuto["practise_test_question"], 1):
                 st.markdown(f"**{i}. {q}**")
@@ -130,44 +148,46 @@ if page == "Zanpakutō Details":
                     st.markdown(f"🧠 Feedback: _{feedback}_")
 
         # Bankai
-        if selected_zanpakuto.get("shikai_unlocked"):
-            if selected_zanpakuto.get("bankai_unlocked"):
-                st.markdown("## 📋 Bankai Tasks")
-                for i, task in enumerate(selected_zanpakuto["bankai_tasks"]):
-                    if st.checkbox(f"{i+1}. {task}", key=f"bankai_{i}_{selected_zanpakuto['name']}"):
-                        selected_zanpakuto["bankai_tasks"].pop(i)
-                        selected_zanpakuto["bankai_progress"] = min(100, selected_zanpakuto["bankai_progress"] + 20)
-                        save_data(data)
-                        st.experimental_rerun()
+        if selected_zanpakuto.get("shikai_unlocked") and selected_zanpakuto.get("bankai_unlocked"):
+            st.markdown("## 📋 Bankai Tasks")
+            for i, task in enumerate(selected_zanpakuto["bankai_tasks"]):
+                if st.checkbox(f"{i+1}. {task}", key=f"bankai_{i}_{selected_zanpakuto['name']}"):
+                    selected_zanpakuto["bankai_tasks"].pop(i)
+                    selected_zanpakuto["bankai_progress"] = min(100, selected_zanpakuto["bankai_progress"] + 20)
+                    if selected_zanpakuto["bankai_progress"] >= 100:
+                        selected_zanpakuto["bankai_unlocked"] = True
+                        st.balloons()
+                        st.success("🎉 Bankai Unlocked!")
+                    save_data(data)
+                    st.experimental_rerun()
 
-                if selected_zanpakuto["bankai_test_question"]:
-                    st.markdown("## 🧪 Bankai Practice Questions")
-                    for i, q in enumerate(selected_zanpakuto["bankai_test_question"], 1):
-                        st.markdown(f"**{i}. {q}**")
-                        user_answer = st.text_area(f"Your Answer (Bankai) {i}", key=f"answer_bankai_{i}")
-                        if user_answer:
-                            feedback = evaluate_answer(q, user_answer)
-                            st.markdown(f"🧠 Feedback: _{feedback}_")
+            if selected_zanpakuto.get("bankai_test_question"):
+                st.markdown("## 🧪 Bankai Practice Questions")
+                for i, q in enumerate(selected_zanpakuto["bankai_test_question"], 1):
+                    st.markdown(f"**{i}. {q}**")
+                    user_answer = st.text_area(f"Your Answer (Bankai) {i}", key=f"answer_bankai_{i}")
+                    if user_answer:
+                        feedback = evaluate_answer(q, user_answer)
+                        st.markdown(f"🧠 Feedback: _{feedback}_")
 
         # Dangai
-        if selected_zanpakuto.get("shikai_unlocked") and selected_zanpakuto.get("bankai_unlocked"):
-            if selected_zanpakuto.get("dangai_unlocked"):
-                st.markdown("## 📋 Dangai Tasks")
-                for i, task in enumerate(selected_zanpakuto["dangai_tasks"]):
-                    if st.checkbox(f"{i+1}. {task}", key=f"dangai_{i}_{selected_zanpakuto['name']}"):
-                        selected_zanpakuto["dangai_tasks"].pop(i)
-                        selected_zanpakuto["dangai_progress"] = min(100, selected_zanpakuto["dangai_progress"] + 20)
-                        save_data(data)
-                        st.experimental_rerun()
+        if selected_zanpakuto.get("bankai_unlocked") and selected_zanpakuto.get("dangai_unlocked"):
+            st.markdown("## 📋 Dangai Tasks")
+            for i, task in enumerate(selected_zanpakuto["dangai_tasks"]):
+                if st.checkbox(f"{i+1}. {task}", key=f"dangai_{i}_{selected_zanpakuto['name']}"):
+                    selected_zanpakuto["dangai_tasks"].pop(i)
+                    selected_zanpakuto["dangai_progress"] = min(100, selected_zanpakuto["dangai_progress"] + 20)
+                    save_data(data)
+                    st.experimental_rerun()
 
-                if selected_zanpakuto["dangai_test_question"]:
-                    st.markdown("## 🧪 Dangai Practice Questions")
-                    for i, q in enumerate(selected_zanpakuto["dangai_test_question"], 1):
-                        st.markdown(f"**{i}. {q}**")
-                        user_answer = st.text_area(f"Your Answer (Dangai) {i}", key=f"answer_dangai_{i}")
-                        if user_answer:
-                            feedback = evaluate_answer(q, user_answer)
-                            st.markdown(f"🧠 Feedback: _{feedback}_")
+            if selected_zanpakuto.get("dangai_test_question"):
+                st.markdown("## 🧪 Dangai Practice Questions")
+                for i, q in enumerate(selected_zanpakuto["dangai_test_question"], 1):
+                    st.markdown(f"**{i}. {q}**")
+                    user_answer = st.text_area(f"Your Answer (Dangai) {i}", key=f"answer_dangai_{i}")
+                    if user_answer:
+                        feedback = evaluate_answer(q, user_answer)
+                        st.markdown(f"🧠 Feedback: _{feedback}_")
 
         st.markdown("---")
         st.markdown("## ✨ Generate Practice Questions")
@@ -183,31 +203,25 @@ if page == "Zanpakutō Details":
                 st.balloons()
                 st.success("✅ Practice questions generated and saved!")
 
-    else:
-        st.error("Zanpakutō not found.")
+        download_button(selected_zanpakuto)
 
-# === SUMMARY PAGE ===
 elif page == "Summary Page":
     st.title("📊 Zanpakutō Summary Overview")
-    st.markdown("This page shows progress for all Zanpakutōs in one view.")
-
     for z in data:
         st.markdown(f"### 🗡️ {z['name']} ({z['kanji']})")
         st.markdown(f"**Domain:** `{z['domain']}`")
         st.markdown(f"**Power:** {z['power']}")
-
-        st.markdown(f"**Shikai (🟡):** {z['shikai_progress']}%")
-        st.markdown(f"<meter value='{z['shikai_progress']}' min='0' max='100'>{z['shikai_progress']}%</meter>", unsafe_allow_html=True)
-
-        st.markdown(f"**Bankai (🔴):** {z['bankai_progress']}%")
-        st.markdown(f"<meter value='{z['bankai_progress']}' min='0' max='100'>{z['bankai_progress']}%</meter>", unsafe_allow_html=True)
-
-        st.markdown(f"**Dangai (⚪):** {z['dangai_progress']}%")
-        st.markdown(f"<meter value='{z['dangai_progress']}' min='0' max='100'>{z['dangai_progress']}%</meter>", unsafe_allow_html=True)
-
-        if z.get("practise_test_question"):
-            st.markdown("**Sample Practice Questions:**")
-            for i, q in enumerate(z["practise_test_question"], 1):
-                st.markdown(f"- {q}")
-
+        draw_gauge("Shikai", z['shikai_progress'])
+        draw_gauge("Bankai", z['bankai_progress'])
+        draw_gauge("Dangai", z['dangai_progress'])
         st.markdown("---")
+
+elif page == "Admin Stats":
+    st.title("🗂️ Admin Dashboard")
+    total = 0
+    for z in data:
+        completed = count_completed_tasks(z)
+        total += completed
+        st.markdown(f"🔹 {z['name']}: **{completed}/15** tasks completed")
+    st.markdown("---")
+    st.markdown(f"**Total Completed Tasks Across All Zanpakutōs:** {total}")
