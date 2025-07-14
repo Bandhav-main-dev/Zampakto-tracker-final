@@ -249,9 +249,9 @@ elif page == "Admin Stats":
     st.markdown("<h1 style='color:#FFD700;'>🧙‍♂️ Admin Zanpakutō Stats</h1>", unsafe_allow_html=True)
     st.markdown("---")
 
-    for z in data:
-        # Clean name for safe key usage
-        zan_key = re.sub(r'\W+', '_', z["name"])
+    for z_idx, z in enumerate(data):
+        # Ensure unique key with loop index
+        zan_key = f"{z_idx}_" + re.sub(r'\W+', '_', z["name"])
 
         with st.container():
             st.markdown(f"### 🗡️ {z['name']} ({z['domain']})")
