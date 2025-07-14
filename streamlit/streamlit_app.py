@@ -72,24 +72,6 @@ textarea, input {
     border-radius: 6px;
 }
             
-/* ===== Sidebar Styling ===== */
-[data-testid="stSidebar"] {
-    background-color: #0a0a0a !important;
-    color: #FFD700 !important;
-    border-right: 1px solid #FFD70033;
-}
-
-[data-testid="stSidebar"] h1,
-[data-testid="stSidebar"] h2,
-[data-testid="stSidebar"] h3,
-[data-testid="stSidebar"] h4 {
-    color: #FFD700 !important;
-}
-
-[data-testid="stSidebar"] .stSelectbox div,
-[data-testid="stSidebar"] .stRadio label {
-    color: #FFD700 !important;
-}
 
 
 /* ===== Animations ===== */
