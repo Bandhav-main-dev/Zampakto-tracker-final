@@ -218,27 +218,28 @@ if page == "Zanpakutō Details":
 
 elif page == "Summary Page":
     st.title("📊 Zanpakutō Summary Overview")
-    selected_summary_name = st.selectbox("Select Zanpakutō for Summary", zanpakuto_names)
-    selected_summary = next(z for z in data if z["name"] == selected_summary_name)
-    z = next((z for z in data if z["name"] == selected_summary), None)
 
-    if z:
-        st.markdown(f"### 🗡️ {z['name']} ({z['kanji']})")
-        st.markdown(f"**Domain:** `{z['domain']}`")
-        st.markdown(f"**Power:** {z['power']}")
-        st.markdown("### 🔥 Progress")
+    selected_summary_name = st.selectbox("Select Zanpakutō for Summary", zanpakuto_names)
+    selected_summary = next((z for z in data if z["name"] == selected_summary_name), None)
+
+    if selected_summary:
+        st.markdown(f"### 🗡️ {selected_summary['name']} ({selected_summary['kanji']})")
+        st.markdown(f"**Domain:** `{selected_summary['domain']}`")
+        st.markdown(f"**Power:** {selected_summary['power']}")
+
         col1, col2, col3 = st.columns(3)
 
         with col1:
-            draw_gauge("Shikai", selected_summary["shikai_progress"])
+            draw_gauge("Shikai", selected_summary['shikai_progress'])
 
         with col2:
-            draw_gauge("Bankai", selected_summary["bankai_progress"])
+            draw_gauge("Bankai", selected_summary['bankai_progress'])
 
         with col3:
-            draw_gauge("Dangai", selected_summary["dangai_progress"])
+            draw_gauge("Dangai", selected_summary['dangai_progress'])
 
-    st.markdown("---")
+        st.markdown("---")
+
 
 
 elif page == "Admin Stats":
