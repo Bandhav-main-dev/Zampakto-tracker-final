@@ -244,10 +244,14 @@ elif page == "Summary Page":
         with col2: progress_bar("bankai", z.get("bankai_progress", 0))
         with col3: progress_bar("dangai", z.get("dangai_progress", 0))
 elif page == "Admin Stats":
+    import re  # Make sure it's imported at the top
     st.markdown("<h1 style='color:#FFD700;'>🧙‍♂️ Admin Zanpakutō Stats</h1>", unsafe_allow_html=True)
     st.markdown("---")
 
     for z in data:
+        # Sanitize name to avoid duplicate keys
+        unique_id = re.sub(r'\W+', '_', z["name"])
+
         with st.container():
             st.markdown(f"### 🗡️ {z['name']} ({z['domain']})")
             cols = st.columns(4)
@@ -259,15 +263,25 @@ elif page == "Admin Stats":
 
             with st.expander("📜 View Tasks & Status"):
                 st.write("**Shikai Tasks:**")
-                for task in z["shikai_tasks"]:
-                    st.checkbox(f"🔹 {task['task']}", value=task["completed"], disabled=True)
+                for i, task in enumerate(z["shikai_tasks"]):
+                    st.checkbox(f"🔹 {task['task']}", value=task["completed"], disabled=True, key=f"{unique_id}_shikai_task_{i}")
                 
                 st.write("**Bankai Tasks:**")
-                for task in z["bankai_tasks"]:
-                    st.checkbox(f"🔸 {task['task']}", value=task["completed"], disabled=True)
+                for i, task in enumerate(z["bankai_tasks"]):
+                    st.checkbox(f"🔸 {task['task']}", value=task["completed"], disabled=True, key=f"{unique_id}_bankai_task_{i}")
 
                 st.write("**Dangai Tasks:**")
-                for task in z["dangai_tasks"]:
-                    st.checkbox(f"🔻 {task['task']}", value=task["completed"], disabled=True)
+                for i, task in enumerate(z["dangai_tasks"]):
+                    st.checkbox(f"🔻 {task['task']}", value=task["completed"], disabled=True, key=f"{unique_id}_dangai_task_{i}")
+
+            with st.expander("🛠️ Admin Controls (Unlock Powers)"):
+                c1, c2, c3 = st.columns(3)
+                z["shikai_unlocked"] = c1.checkbox("Unlock Shikai", value=z["shikai_unlocked"], key=f"{unique_id}_unlock_shikai")
+                z["bankai_unlocked"] = c2.checkbox("Unlock Bankai", value=z["bankai_unlocked"], key=f"{unique_id}_unlock_bankai")
+                z["dangai_unlocked"] = c3.checkbox("Unlock Dangai", value=z["dangai_unlocked"], key=f"{unique_id}_unlock_dangai")
 
             st.markdown("---")
+
+    # Save after changes
+    with open(DATA_FILE, "w") as f:
+        json.dump(data, f, indent=2)
