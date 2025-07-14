@@ -366,6 +366,318 @@
     "How do you say 'good morning' in Japanese?"
   ],
   "notes": "Progress synced with Duolingo (Unit 4 of Section 1). Vocabulary and kanji memorized. Next step: anime subtitle practice and writing intro."
+},
+{
+  "name": "Gōkon Shisō",
+  "kanji": "合魂思創",
+  "domain": "Prompt Engineering & AI Communication",
+  "release_command": "Fuse with the source… Gōkon Shisō!",
+  "power": "Refines thoughts into structured prompts to unlock the true power of AI models and language-based intelligence.",
+  "shikai_unlocked": true,
+  "bankai_unlocked": false,
+  "dangai_unlocked": false,
+  "shikai_progress": 100,
+  "bankai_progress": 0,
+  "dangai_progress": 0,
+  "shikai_test_passed": true,
+  "bankai_test_passed": false,
+  "dangai_test_passed": false,
+  "shikai_tasks": [
+    {"task": "Read OpenAI/Gemini Prompt Engineering Guide", "completed": true},
+    {"task": "Write 10 structured prompts for different use cases", "completed": true},
+    {"task": "Analyze the effect of temperature in a prompt output", "completed": true},
+    {"task": "Refactor a bad prompt into a clear instruction", "completed": true},
+    {"task": "Create prompt for a legal Q&A chatbot", "completed": true}
+  ],
+  "bankai_tasks": [
+    {"task": "Create a multi-step prompt chain for study planner AI", "completed": false},
+    {"task": "Design an instruction-following agent using Gemini or ChatGPT", "completed": false},
+    {"task": "Optimize a prompt to summarize research papers", "completed": false},
+    {"task": "Use few-shot examples to build a resume reviewer", "completed": false},
+    {"task": "Experiment with role-based prompting (e.g., act as lawyer)", "completed": false}
+  ],
+  "dangai_tasks": [
+    {"task": "Build an AI tool that adapts prompts based on user input", "completed": false},
+    {"task": "Compare prompt performance across GPT-4o vs Gemini Pro", "completed": false},
+    {"task": "Create 1-page guide to best prompting patterns", "completed": false}
+  ],
+  "shikai_test_question": [
+    "Rewrite this vague prompt: 'Explain stuff about AI'.",
+    "What does 'zero-shot' prompting mean?"
+  ],
+  "bankai_test_question": [
+    "Design a 3-step prompt for generating blog posts on AI.",
+    "What are 'chain-of-thought' prompts and why are they useful?"
+  ],
+  "dangai_test_question": [
+    "Build a prompt that can dynamically switch roles (lawyer, teacher, coder) based on query.",
+    "Explain how prompt tuning differs from prompt engineering."
+  ],
+  "practise_test_question": [
+    "What’s the difference between prompt templates and prompt chaining?",
+    "Give an example of a poor prompt and its corrected version."
+  ],
+  "notes": "Shikai complete using Gemini and OpenAI. Starting multi-step prompts next."
+},
+{
+  "name": "Shōten Myōji",
+  "kanji": "照天妙示",
+  "domain": "Data Prototyping & Insight",
+  "release_command": "Illuminate the code… Shōten Myōji!",
+  "power": "Reveals deep truths instantly by fusing code, narrative, and data insight in a single space.",
+  "shikai_unlocked": true,
+  "bankai_unlocked": false,
+  "dangai_unlocked": false,
+  "shikai_progress": 90,
+  "bankai_progress": 0,
+  "dangai_progress": 0,
+  "shikai_test_passed": false,
+  "bankai_test_passed": false,
+  "dangai_test_passed": false,
+  "shikai_tasks": [
+    {"task": "Create a basic notebook with Markdown, code, and charts", "completed": true},
+    {"task": "Use pandas profiling or seaborn in notebook", "completed": true},
+    {"task": "Export notebook as PDF with output", "completed": true},
+    {"task": "Embed visual explanation using matplotlib", "completed": true},
+    {"task": "Use %time or %debug magic command", "completed": false}
+  ],
+  "bankai_tasks": [
+    {"task": "Use widgets (interact, dropdown) in notebook", "completed": false},
+    {"task": "Run notebook on Google Colab with GPU", "completed": false},
+    {"task": "Link notebook to external API for live data", "completed": false},
+    {"task": "Use nbconvert to create HTML report", "completed": false},
+    {"task": "Visualize model predictions with matplotlib/plotly", "completed": false}
+  ],
+  "dangai_tasks": [
+    {"task": "Use Voila to convert notebook into web app", "completed": false},
+    {"task": "Create an AI-powered notebook for question answering", "completed": false},
+    {"task": "Integrate Gemini-generated test questions into notebook", "completed": false}
+  ],
+  "shikai_test_question": [
+    "What is the difference between %timeit and %time?",
+    "Why is Jupyter better for data science than plain .py files?"
+  ],
+  "bankai_test_question": [
+    "Explain how ipywidgets can improve notebook interactivity.",
+    "How do you convert a Jupyter notebook into a standalone report?"
+  ],
+  "dangai_test_question": [
+    "Demonstrate turning a notebook into a dashboard using Voila.",
+    "Embed an AI model and display predictions live inside the notebook."
+  ],
+  "practise_test_question": [
+    "What are Jupyter magic commands? Give two examples.",
+    "How can you document experiments using Markdown in notebooks?"
+  ],
+  "notes": "Shikai nearly complete. Exploring GPU notebooks and widget-based interactivity next."
+},
+{
+  "name": "Keisan Senkō",
+  "kanji": "計算閃光",
+  "domain": "AI Mathematics (Linear Algebra, Stats, Probability)",
+  "release_command": "Shatter illusions with numbers… Keisan Senkō!",
+  "power": "Calculates complex mathematical patterns in the blink of an eye, empowering models with precision and depth.",
+  "shikai_unlocked": true,
+  "bankai_unlocked": false,
+  "dangai_unlocked": false,
+  "shikai_progress": 85,
+  "bankai_progress": 0,
+  "dangai_progress": 0,
+  "shikai_test_passed": false,
+  "bankai_test_passed": false,
+  "dangai_test_passed": false,
+  "shikai_tasks": [
+    {"task": "Revise vector operations and dot product", "completed": true},
+    {"task": "Understand matrix multiplication and its role in neural nets", "completed": true},
+    {"task": "Learn mean, median, mode, and standard deviation", "completed": true},
+    {"task": "Understand conditional probability and Bayes’ Theorem", "completed": true},
+    {"task": "Plot normal distribution and explain its relevance", "completed": false}
+  ],
+  "bankai_tasks": [
+    {"task": "Learn eigenvalues and eigenvectors with examples", "completed": false},
+    {"task": "Explore gradient descent using a quadratic function", "completed": false},
+    {"task": "Implement probability density function for normal distribution", "completed": false},
+    {"task": "Work through loss functions (MSE, Cross-Entropy)", "completed": false},
+    {"task": "Visualize sigmoid, tanh, and ReLU activation functions", "completed": false}
+  ],
+  "dangai_tasks": [
+    {"task": "Derive backpropagation for 1-layer neural net", "completed": false},
+    {"task": "Apply PCA on a dataset and explain results", "completed": false},
+    {"task": "Create mindmap connecting math topics to AI concepts", "completed": false}
+  ],
+  "shikai_test_question": [
+    "What is the role of matrix multiplication in neural networks?",
+    "Explain standard deviation in your own words."
+  ],
+  "bankai_test_question": [
+    "What are eigenvectors used for in AI?",
+    "Define cross-entropy loss with a simple example."
+  ],
+  "dangai_test_question": [
+    "Derive the gradient of a simple linear regression function.",
+    "Explain PCA with a real-world analogy."
+  ],
+  "practise_test_question": [
+    "What is Bayes’ Theorem? Give one use case in ML.",
+    "Why is the normal distribution so common in data science?"
+  ],
+  "notes": "Shikai nearly complete. Will start visualizing activation and loss functions next."
+},
+{
+  "name": "Shinri no Saiban",
+  "kanji": "真理の裁判",
+  "domain": "Responsible AI / Ethics",
+  "release_command": "Judge without bias… Shinri no Saiban!",
+  "power": "Balances intelligence and fairness, enforcing ethical codes upon every data-driven action.",
+  "shikai_unlocked": true,
+  "bankai_unlocked": false,
+  "dangai_unlocked": false,
+  "shikai_progress": 50,
+  "bankai_progress": 0,
+  "dangai_progress": 0,
+  "shikai_test_passed": false,
+  "bankai_test_passed": false,
+  "dangai_test_passed": false,
+  "shikai_tasks": [
+    {"task": "Read ‘A Short Guide to Ethical AI’ by Google", "completed": true},
+    {"task": "Define fairness, privacy, and bias in ML", "completed": false},
+    {"task": "Watch a documentary or lecture on AI bias", "completed": true},
+    {"task": "Identify bias in a real AI tool or dataset", "completed": false},
+    {"task": "Write a 5-point AI ethics checklist", "completed": false}
+  ],
+  "bankai_tasks": [
+    {"task": "Simulate an AI decision and check for fairness issues", "completed": false},
+    {"task": "Write a case study on AI misuse or bias (e.g. COMPAS)", "completed": false},
+    {"task": "Compare ethical AI principles from 2 big tech companies", "completed": false},
+    {"task": "Implement differential privacy on small dataset", "completed": false},
+    {"task": "Create a presentation on explainable AI (XAI)", "completed": false}
+  ],
+  "dangai_tasks": [
+    {"task": "Design an AI model with fairness constraints", "completed": false},
+    {"task": "Propose your own ethical framework for AI developers", "completed": false},
+    {"task": "Debate ethical issues in LLMs (hallucination, misuse)", "completed": false}
+  ],
+  "shikai_test_question": [
+    "Define algorithmic bias with an example.",
+    "What is privacy in AI and why does it matter?"
+  ],
+  "bankai_test_question": [
+    "How can explainability reduce mistrust in AI?",
+    "List 3 real-world harms caused by biased algorithms."
+  ],
+  "dangai_test_question": [
+    "Create a proposal for making your AI project more ethical.",
+    "What are the trade-offs in balancing performance vs fairness?"
+  ],
+  "practise_test_question": [
+    "What is differential privacy?",
+    "Give an example where AI made an unethical decision."
+  ],
+  "notes": "Basics of bias and fairness studied. Real-world ethical frameworks coming next."
+},
+{
+  "name": "Unmei Kaikō",
+  "kanji": "運命邂逅",
+  "domain": "Deep Learning & Language Models",
+  "release_command": "Converge all paths… Unmei Kaikō!",
+  "power": "Harnesses deep cognition to forge meaningful patterns from words, sequences, and sensory data.",
+  "shikai_unlocked": true,
+  "bankai_unlocked": false,
+  "dangai_unlocked": false,
+  "shikai_progress": 75,
+  "bankai_progress": 0,
+  "dangai_progress": 0,
+  "shikai_test_passed": false,
+  "bankai_test_passed": false,
+  "dangai_test_passed": false,
+  "shikai_tasks": [
+    {"task": "Train basic neural network using Keras", "completed": true},
+    {"task": "Understand forward/backward pass in a neural net", "completed": true},
+    {"task": "Use HuggingFace to classify sentiment from text", "completed": false},
+    {"task": "Compare LSTM and Transformer architectures", "completed": false},
+    {"task": "Visualize training loss over epochs", "completed": false}
+  ],
+  "bankai_tasks": [
+    {"task": "Fine-tune BERT or DistilBERT on custom dataset", "completed": false},
+    {"task": "Use Whisper model to transcribe audio", "completed": false},
+    {"task": "Build a chatbot using LangChain or HuggingFace", "completed": false},
+    {"task": "Implement attention mechanism manually", "completed": false},
+    {"task": "Experiment with Gemini or GPT-4o API for summarization", "completed": false}
+  ],
+  "dangai_tasks": [
+    {"task": "Compare generative vs discriminative LLMs", "completed": false},
+    {"task": "Build real-time Q&A semantic bot with FAISS", "completed": false},
+    {"task": "Design benchmark for evaluating model hallucination", "completed": false}
+  ],
+  "shikai_test_question": [
+    "What is backpropagation and why is it important?",
+    "Explain the difference between RNN and Transformer."
+  ],
+  "bankai_test_question": [
+    "What does fine-tuning BERT mean?",
+    "How does the attention mechanism help in NLP?"
+  ],
+  "dangai_test_question": [
+    "Explain hallucination in LLMs with an example.",
+    "How would you reduce model bias in a deep NLP model?"
+  ],
+  "practise_test_question": [
+    "What is the difference between encoder and decoder in Transformers?",
+    "Name one use case of HuggingFace Transformers in real life."
+  ],
+  "notes": "Shikai near completion. Plan to fine-tune HuggingFace models and explore Whisper audio next."
+},
+{
+  "name": "Irohana Enbu",
+  "kanji": "彩華演舞",
+  "domain": "UI/UX Design (Streamlit + Figma)",
+  "release_command": "Unfold elegance in motion… Irohana Enbu!",
+  "power": "Blends intuitive interface design with powerful data storytelling using Streamlit and Figma.",
+  "shikai_unlocked": true,
+  "bankai_unlocked": false,
+  "dangai_unlocked": false,
+  "shikai_progress": 60,
+  "bankai_progress": 0,
+  "dangai_progress": 0,
+  "shikai_test_passed": false,
+  "bankai_test_passed": false,
+  "dangai_test_passed": false,
+  "shikai_tasks": [
+    {"task": "Explore Figma and design a 1-page dashboard layout", "completed": true},
+    {"task": "Use Streamlit markdown to create layout sections", "completed": true},
+    {"task": "Implement sidebar navigation using `st.sidebar`", "completed": false},
+    {"task": "Use Streamlit columns and containers for clean layout", "completed": false},
+    {"task": "Apply Figma spacing/alignment rules into Streamlit layout", "completed": false}
+  ],
+  "bankai_tasks": [
+    {"task": "Redesign an existing Streamlit app using Figma wireframe", "completed": false},
+    {"task": "Use `st.metric`, `st.expander`, or `st.tabs` for UX improvement", "completed": false},
+    {"task": "Embed Figma prototype screenshots into your Streamlit project", "completed": false},
+    {"task": "Create a feedback form with `st.form` for user testing", "completed": false},
+    {"task": "Document UI/UX changes using Figma notes and Streamlit markdown", "completed": false}
+  ],
+  "dangai_tasks": [
+    {"task": "Design and implement a full multi-page UI layout in Streamlit", "completed": false},
+    {"task": "Animate user interaction (balloons, success, progress updates)", "completed": false},
+    {"task": "Publish and showcase UI/UX case study using Streamlit Sharing + Figma design", "completed": false}
+  ],
+  "shikai_test_question": [
+    "Why is Figma useful for planning Streamlit UI?",
+    "What is the role of `st.sidebar()` in UX design?"
+  ],
+  "bankai_test_question": [
+    "List 3 UI components that improve Streamlit user experience.",
+    "How can you translate a Figma wireframe into a Streamlit layout?"
+  ],
+  "dangai_test_question": [
+    "Explain your approach to building a multi-page Streamlit app with design consistency.",
+    "How would you combine Figma and Streamlit to deliver a polished AI dashboard?"
+  ],
+  "practise_test_question": [
+    "What are the benefits of using containers and columns in Streamlit?",
+    "How do you make your Streamlit app look more professional?"
+  ],
+  "notes": "Focusing on merging Figma design clarity with practical Streamlit layouts. Clean UX begins with good structure."
 }
 
 ]
