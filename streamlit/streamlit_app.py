@@ -257,7 +257,6 @@ if page == "Admin Stats" and not st.session_state.admin_authenticated:
         if password_input == ADMIN_PASSWORD:
             st.success("Access granted! Welcome, Captain.")
             st.session_state.admin_authenticated = True
-            st.experimental_rerun()
         else:
             st.error("Wrong password. Access denied.")
             st.rerun()
