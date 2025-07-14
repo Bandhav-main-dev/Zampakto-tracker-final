@@ -4,7 +4,7 @@ import os
 import google.generativeai as genai
 
 # === CONFIG ===
-DATA_FILE = "/workspaces/Zampakto-tracker-final/streamlit/zanpakuto_data.json"
+DATA_FILE = os.path.join(os.path.dirname(__file__), "zanpakuto_data.json")
 GOOGLE_API_KEY = "AIzaSyBaBnQt9uGLo-C0lw-I2WvZ5mbLWxKVK_8"
 
 # === SETUP ===
