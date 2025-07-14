@@ -147,7 +147,6 @@ if page == "Zanpakutō Details":
                     st.balloons()
                     st.success("🎉 Shikai Unlocked!")
                 save_data(data)
-                st.experimental_rerun()
 
         if selected_zanpakuto.get("practise_test_question"):
             st.markdown("## 🧪 Shikai Practice Questions")
@@ -170,7 +169,6 @@ if page == "Zanpakutō Details":
                         st.balloons()
                         st.success("🎉 Bankai Unlocked!")
                     save_data(data)
-                    st.experimental_rerun()
 
             if selected_zanpakuto.get("bankai_test_question"):
                 st.markdown("## 🧪 Bankai Practice Questions")
@@ -189,7 +187,6 @@ if page == "Zanpakutō Details":
                     selected_zanpakuto["dangai_tasks"].pop(i)
                     selected_zanpakuto["dangai_progress"] = min(100, selected_zanpakuto["dangai_progress"] + 20)
                     save_data(data)
-                    st.experimental_rerun()
 
             if selected_zanpakuto.get("dangai_test_question"):
                 st.markdown("## 🧪 Dangai Practice Questions")
