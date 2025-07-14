@@ -247,37 +247,11 @@ elif page == "Admin Stats":
     st.markdown("<h1 style='color:#FFD700;'>🧙‍♂️ Admin Zanpakutō Stats</h1>", unsafe_allow_html=True)
     st.markdown("---")
 
-    # --- Compute average progress ---
-    total_shikai = sum(z["shikai_progress"] for z in data)
-    total_bankai = sum(z["bankai_progress"] for z in data)
-    total_dangai = sum(z["dangai_progress"] for z in data)
-    total_zanpakuto = len(data)
-    overall_avg = round((total_shikai + total_bankai + total_dangai) / (3 * total_zanpakuto), 2)
-
-    st.metric("⚔️ Overall Zanpakutō Completion", f"{overall_avg}%")
-    st.markdown("---")
-
-    # --- Sort Option ---
-    sort_by = st.selectbox("🔃 Sort Zanpakutō by", ["Name", "Shikai Progress", "Bankai Progress", "Total Progress"])
-
-    def sort_key(z):
-        if sort_by == "Shikai Progress":
-            return -z["shikai_progress"]
-        elif sort_by == "Bankai Progress":
-            return -z["bankai_progress"]
-        elif sort_by == "Total Progress":
-            return -(z["shikai_progress"] + z["bankai_progress"] + z["dangai_progress"])
-        else:
-            return z["name"]
-
-    sorted_data = sorted(data, key=sort_key)
-
-    for z in sorted_data:
+    for z in data:
         with st.container():
             st.markdown(f"### 🗡️ {z['name']} ({z['domain']})")
-            total_progress = (z["shikai_progress"] + z["bankai_progress"] + z["dangai_progress"]) // 3
-
             cols = st.columns(4)
+
             cols[0].metric("Shikai 🔓", "✅" if z["shikai_unlocked"] else "❌")
             cols[1].progress(z["shikai_progress"] / 100, text=f"{z['shikai_progress']}%")
             cols[2].metric("Bankai 🔓", "✅" if z["bankai_unlocked"] else "❌")
@@ -287,26 +261,13 @@ elif page == "Admin Stats":
                 st.write("**Shikai Tasks:**")
                 for task in z["shikai_tasks"]:
                     st.checkbox(f"🔹 {task['task']}", value=task["completed"], disabled=True)
+                
                 st.write("**Bankai Tasks:**")
                 for task in z["bankai_tasks"]:
                     st.checkbox(f"🔸 {task['task']}", value=task["completed"], disabled=True)
+
                 st.write("**Dangai Tasks:**")
                 for task in z["dangai_tasks"]:
                     st.checkbox(f"🔻 {task['task']}", value=task["completed"], disabled=True)
 
-            with st.expander("🛠️ Admin Controls (Unlock Powers)"):
-                c1, c2, c3 = st.columns(3)
-                shikai_toggle = c1.checkbox("Unlock Shikai", value=z["shikai_unlocked"], key=f"{z['name']}_shikai")
-                bankai_toggle = c2.checkbox("Unlock Bankai", value=z["bankai_unlocked"], key=f"{z['name']}_bankai")
-                dangai_toggle = c3.checkbox("Unlock Dangai", value=z["dangai_unlocked"], key=f"{z['name']}_dangai")
-
-                z["shikai_unlocked"] = shikai_toggle
-                z["bankai_unlocked"] = bankai_toggle
-                z["dangai_unlocked"] = dangai_toggle
-
-            st.markdown(f"🧮 **Total Progress:** `{total_progress}%`")
             st.markdown("---")
-
-    # --- Save Changes ---
-    with open(DATA_FILE, "w") as f:
-        json.dump(data, f, indent=2)
