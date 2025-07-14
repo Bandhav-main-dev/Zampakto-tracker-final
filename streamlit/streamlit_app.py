@@ -15,82 +15,84 @@ model = genai.GenerativeModel("models/gemini-2.0-flash")
 # === BLEACH THEME CSS + GOLDEN UI UPGRADE ===
 st.markdown("""
 <style>
+/* ===== Global Styling ===== */
 body {
-    background: url('https://www.transparenttextures.com/patterns/black-linen.png');
-    background-color: #0f0f0f;
+    background-color: #000000;
     color: #f1f1f1;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Cinzel', serif;
 }
 
+/* ===== Headings ===== */
 h1, h2, h3, h4 {
-    color: #ffd700;
+    color: #FFD700;
     font-weight: bold;
-    text-shadow: 0 0 5px #ffd700;
+    text-shadow: 0 0 5px #FFD70088;
 }
 
+/* ===== Buttons ===== */
 .stButton button {
-    background-color: #ef4444;
-    color: white;
-    border: none;
+    background-color: #111111;
+    color: #FFD700;
+    border: 1px solid #FFD700;
     border-radius: 8px;
     padding: 0.5em 1.2em;
     font-weight: bold;
-    box-shadow: 0 0 10px #facc15;
+    transition: all 0.3s ease;
 }
-
 .stButton button:hover {
-    background-color: #facc15;
+    background-color: #FFD700;
     color: black;
-    box-shadow: 0 0 15px #facc15;
 }
 
+/* ===== Text Areas and Inputs ===== */
 textarea, input {
-    background-color: #1f1f1f;
-    color: white;
-    border: 1px solid #ffd700;
+    background-color: #0d0d0d;
+    color: #ffffff;
+    border: 1px solid #FFD700;
     border-radius: 6px;
-    padding: 0.5em;
 }
 
+/* ===== Panels ===== */
+.block-container {
+    background: #0a0a0a;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #FFD70033;
+}
+
+/* ===== Scrollbars ===== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #111;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #FFD700;
+    border-radius: 6px;
+}
+
+/* ===== Animations ===== */
 .spiritual-slash {
-    position: relative;
     text-align: center;
     font-size: 2em;
     font-weight: bold;
     color: #fff;
-    background: linear-gradient(90deg, #ef4444, #facc15, #fff);
+    background: linear-gradient(90deg, #FFD700, #000, #FFD700);
     padding: 1rem 2rem;
     margin: 1rem 0;
     border-radius: 12px;
-    box-shadow: 0 0 15px #facc15;
+    box-shadow: 0 0 15px #FFD700;
     animation: slashFlash 1s ease-out forwards;
 }
-
 @keyframes slashFlash {
     0% { opacity: 0; transform: scale(0.5) rotate(-15deg); filter: blur(4px); }
     50% { opacity: 1; transform: scale(1.2) rotate(3deg); filter: blur(0px); }
     100% { opacity: 1; transform: scale(1.0) rotate(0deg); }
 }
-
-::-webkit-scrollbar {
-    width: 12px;
-}
-
-::-webkit-scrollbar-track {
-    background: #1f1f1f;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #ffd700;
-    border-radius: 6px;
-    box-shadow: inset 0 0 5px #000;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #facc15;
-}
 </style>
 """, unsafe_allow_html=True)
+
 
 # === LOAD / SAVE ===
 def load_data():
