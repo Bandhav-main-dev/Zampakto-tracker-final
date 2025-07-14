@@ -1,3 +1,2 @@
-streamlit==1.35.0
-google-generativeai==0.5.2
-protobuf==4.25.3  # Ensures compatibility with google-generativeai
+streamlit>=1.33.0
+google-generativeai>=0.3.2
