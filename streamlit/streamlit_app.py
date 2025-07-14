@@ -3,6 +3,7 @@ import json
 import os
 import google.generativeai as genai
 import re
+from config import ADMIN_PASSWORD
 
 # === MUST BE FIRST ===
 st.set_page_config(page_title="Zanpakutō Tracker", layout="wide")
@@ -245,8 +246,23 @@ elif page == "Summary Page":
         with col2: progress_bar("bankai", z.get("bankai_progress", 0))
         with col3: progress_bar("dangai", z.get("dangai_progress", 0))
 
+
+if "admin_authenticated" not in st.session_state:
+    st.session_state.admin_authenticated = False
+
+if page == "Admin Stats" and not st.session_state.admin_authenticated:
+    st.markdown("<h2 style='color:#FFD700;'>🔐 Admin Login</h2>", unsafe_allow_html=True)
+    password_input = st.text_input("Enter Admin Password", type="password")
+    if st.button("Login"):
+        if password_input == ADMIN_PASSWORD:
+            st.success("Access granted! Welcome, Captain.")
+            st.session_state.admin_authenticated = True
+        else:
+            st.error("Wrong password. Access denied.")
+    st.stop()
+
 elif page == "Admin Stats":
-    st.markdown("<h1 style='color:#FFD700;'>🧙‍♂️ Admin Zanpakutō Stats</h1>", unsafe_allow_html=True)
+    # Your existing admin page logic here (with progress bars, unlocks, tasks etc.)    st.markdown("<h1 style='color:#FFD700;'>🧙‍♂️ Admin Zanpakutō Stats</h1>", unsafe_allow_html=True)
     st.markdown("---")
 
     for z_idx, z in enumerate(data):
