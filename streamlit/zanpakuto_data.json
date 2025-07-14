@@ -5,35 +5,35 @@
     "domain": "AI / Machine Learning",
     "release_command": "Pierce reality… Shinjitsu Tenshō!",
     "power": "Unites APIs, semantic AI, and automation to build intelligent truth engines.",
-    "shikai_unlocked": true,
+    "shikai_unlocked": false,
     "bankai_unlocked": false,
     "dangai_unlocked": false,
-    "shikai_progress": 100,
+    "shikai_progress": 0,
     "bankai_progress": 0,
     "dangai_progress": 0,
-    "shikai_test_passed": true,
+    "shikai_test_passed": false,
     "bankai_test_passed": false,
     "dangai_test_passed": false,
     "shikai_tasks": [
       {
         "task": "Understand basics of supervised vs unsupervised learning",
-        "completed": true
+        "completed": false
       },
       {
         "task": "Implement linear regression with scikit-learn",
-        "completed": true
+        "completed": false
       },
       {
         "task": "Train a classification model using decision trees",
-        "completed": true
+        "completed": false
       },
       {
         "task": "Visualize model accuracy with matplotlib",
-        "completed": true
+        "completed": false
       },
       {
         "task": "Explore vector embeddings with Sentence Transformers",
-        "completed": true
+        "completed": false
       }
     ],
     "bankai_tasks": [
