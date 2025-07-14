@@ -12,7 +12,7 @@ GOOGLE_API_KEY = "AIzaSyDsiipSZorPJHovyDHLb86XXBx-aYipAMM"
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel("models/gemini-2.0-flash")
 
-# === BLEACH THEME CSS + ANIMATION ===
+# === BLEACH THEME CSS + GETSUGA TENSHO ANIMATION ===
 st.markdown("""
 <style>
 body { background-color: #0a0a0a; color: #f1f1f1; }
@@ -27,72 +27,45 @@ h1,h2,h3,h4 { color: #ffd700; font-weight: bold; }
 .stButton button:hover {
     background-color: #facc15; color: black;
 }
-
 textarea, input {
-    background-color: #1f1f1f; color: white;
+    background-color: #1a1a1a; color: white;
     border: 1px solid #ffd700; border-radius: 6px;
 }
 
-/* Sidebar dark background */
+/* Sidebar styling */
 section[data-testid="stSidebar"] {
-    background-color: #121212;
-    border-right: 1px solid #444;
+    background-color: #111111;
+    border-right: 2px solid #ffd700;
 }
 
-.spiritual-slash {
-    position: relative;
+/* Getsuga Tensho Flash */
+.getsuga-flash {
     text-align: center;
     font-size: 2em;
     font-weight: bold;
-    color: #fff;
-    background: linear-gradient(90deg, #ef4444, #facc15, #fff);
-    padding: 1rem 2rem;
+    color: #ffffff;
+    padding: 1.5rem;
     margin: 1rem 0;
     border-radius: 12px;
-    box-shadow: 0 0 15px #facc15;
-    animation: slashFlash 1s ease-out forwards;
+    background: linear-gradient(90deg, #111, #3b82f6, #111);
+    box-shadow: 0 0 20px #3b82f6;
+    animation: getsuga 1s ease-in-out forwards;
 }
-
-@keyframes slashFlash {
-    0% { opacity: 0; transform: scale(0.5) rotate(-15deg); filter: blur(4px); }
-    50% { opacity: 1; transform: scale(1.2) rotate(3deg); filter: blur(0px); }
+@keyframes getsuga {
+    0% { opacity: 0; transform: scale(0.3) rotate(-25deg); filter: blur(5px); }
+    40% { opacity: 1; transform: scale(1.3) rotate(5deg); filter: blur(0); }
     100% { opacity: 1; transform: scale(1.0) rotate(0deg); }
-}
-
-@keyframes braveUnlock {
-    0% {
-        transform: scale(0.8);
-        opacity: 0;
-        filter: brightness(0.4) blur(4px);
-    }
-    40% {
-        transform: scale(1.05);
-        opacity: 1;
-        filter: brightness(1.4) blur(0px);
-        border: 4px solid gold;
-        box-shadow: 0 0 40px gold;
-    }
-    100% {
-        transform: scale(1);
-        filter: brightness(1);
-    }
-}
-
-.brave-unlock {
-    font-size: 2.4rem;
-    text-align: center;
-    margin-top: 20px;
-    padding: 1.5rem 2rem;
-    color: #fff;
-    border: 3px solid #FFD700;
-    border-radius: 16px;
-    background: linear-gradient(90deg, #000000, #FFD70022, #000000);
-    box-shadow: 0 0 30px #FFD70066;
-    animation: braveUnlock 1.6s ease-out;
 }
 </style>
 """, unsafe_allow_html=True)
 
+# === GETSUGA ANIMATION HELPER ===
+def getsuga_tensho(level):
+    st.markdown(f"""
+        <div class="getsuga-flash">
+            ⚡ GETSUGA TENSHŌ — {level.upper()} UNLEASHED ⚡
+        </div>
+    """, unsafe_allow_html=True)
 # === LOAD / SAVE ===
 def load_data():
     with open(DATA_FILE, "r", encoding="utf-8") as f:
@@ -202,9 +175,9 @@ def handle_tasks(zanpakuto, level, data):
 
     if total_progress == 100 and not zanpakuto.get(unlocked_key):
         zanpakuto[unlocked_key] = True
-        reiatsu_burst(level)
-        st.markdown(f'<div class="brave-unlock">🔥 {level.capitalize()} Awakened! 🔥</div>', unsafe_allow_html=True)
+        getsuga_tensho(level)
         st.markdown(f"##### 🗡️ \"_{zanpakuto['release_command']}_\"")
+        st.success(f"🎉 {level.capitalize()} Unlocked!")
         changed = True
 
     if changed:
