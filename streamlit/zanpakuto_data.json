@@ -315,16 +315,16 @@
     "practise_test_question": ["What is latency?", "What tools monitor cloud performance?"],
     "notes": "Shikai complete with Colab + ML + cloud intro. Bankai started: deployment + DBs."
   },
-  {
+{
   "name": "Kōmyō Setsuna",
   "kanji": "光明刹那",
   "domain": "Language & Global Reach (Japanese)",
   "release_command": "Shine across all tongues… Kōmyō Setsuna!",
   "power": "Harnesses linguistic clarity and global understanding through language mastery and cultural connection.",
-  "shikai_unlocked": false,
+  "shikai_unlocked": true,
   "bankai_unlocked": false,
   "dangai_unlocked": false,
-  "shikai_progress": 0,
+  "shikai_progress": 80,
   "bankai_progress": 0,
   "dangai_progress": 0,
   "shikai_test_passed": false,
@@ -332,9 +332,9 @@
   "dangai_test_passed": false,
   "shikai_tasks": [
     {"task": "Complete Duolingo Japanese Section 1 (Unit 1 to 5)", "completed": false},
-    {"task": "Memorize 25 basic Japanese vocabulary words (e.g., 水, 猫, 学生)", "completed": false},
+    {"task": "Memorize 25 basic Japanese vocabulary words (e.g., 水, 猫, 学生)", "completed": true},
     {"task": "Watch 1 anime episode with Japanese subtitles", "completed": false},
-    {"task": "Learn 5 basic kanji (日, 本, 人, 水, 学)", "completed": false},
+    {"task": "Learn 5 basic kanji (日, 本, 人, 水, 学)", "completed": true},
     {"task": "Introduce yourself in Japanese (write or record)", "completed": false}
   ],
   "bankai_tasks": [
@@ -365,7 +365,7 @@
     "What is the meaning of 日本語?",
     "How do you say 'good morning' in Japanese?"
   ],
-  "notes": "Tracks Duolingo progress, anime comprehension, vocabulary and JLPT N5 goals. Kōmyō Setsuna's true form is unlocked through language fluency and consistency."
+  "notes": "Progress synced with Duolingo (Unit 4 of Section 1). Vocabulary and kanji memorized. Next step: anime subtitle practice and writing intro."
 }
 
 ]
