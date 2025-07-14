@@ -8,29 +8,50 @@ st.set_page_config(page_title="Zanpakutō Tracker", layout="wide")
 
 # === CONFIG ===
 DATA_FILE = os.path.join(os.path.dirname(__file__), "zanpakuto_data.json")
-GOOGLE_API_KEY = "AIzaSyDsiipSZorPJHovyDHLb86XXBx-aYipAMM"
+GOOGLE_API_KEY = "YOUR_API_KEY"
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel("models/gemini-2.0-flash")
 
-# === BLEACH THEME CSS + ANIMATION ===
+# === BLEACH THEME CSS + GOLDEN UI UPGRADE ===
 st.markdown("""
 <style>
-body { background-color: #0f0f0f; color: #f1f1f1; }
+body {
+    background: url('https://www.transparenttextures.com/patterns/black-linen.png');
+    background-color: #0f0f0f;
+    color: #f1f1f1;
+    font-family: 'Segoe UI', sans-serif;
+}
 
-h1,h2,h3,h4 { color: #ffd700; font-weight: bold; }
+h1, h2, h3, h4 {
+    color: #ffd700;
+    font-weight: bold;
+    text-shadow: 0 0 5px #ffd700;
+}
 
 .stButton button {
-    background-color: #ef4444; color: white;
-    border: none; border-radius: 8px;
-    padding: 0.5em 1.2em; font-weight: bold;
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5em 1.2em;
+    font-weight: bold;
+    box-shadow: 0 0 10px #facc15;
 }
+
 .stButton button:hover {
-    background-color: #facc15; color: black;
+    background-color: #facc15;
+    color: black;
+    box-shadow: 0 0 15px #facc15;
 }
+
 textarea, input {
-    background-color: #1f1f1f; color: white;
-    border: 1px solid #ffd700; border-radius: 6px;
+    background-color: #1f1f1f;
+    color: white;
+    border: 1px solid #ffd700;
+    border-radius: 6px;
+    padding: 0.5em;
 }
+
 .spiritual-slash {
     position: relative;
     text-align: center;
@@ -44,10 +65,29 @@ textarea, input {
     box-shadow: 0 0 15px #facc15;
     animation: slashFlash 1s ease-out forwards;
 }
+
 @keyframes slashFlash {
     0% { opacity: 0; transform: scale(0.5) rotate(-15deg); filter: blur(4px); }
     50% { opacity: 1; transform: scale(1.2) rotate(3deg); filter: blur(0px); }
     100% { opacity: 1; transform: scale(1.0) rotate(0deg); }
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1f1f1f;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ffd700;
+    border-radius: 6px;
+    box-shadow: inset 0 0 5px #000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #facc15;
 }
 </style>
 """, unsafe_allow_html=True)
