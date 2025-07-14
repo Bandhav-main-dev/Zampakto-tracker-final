@@ -314,5 +314,58 @@
     "dangai_test_question": ["Design auto-scaling ML app in cloud.", "Explain docker-compose for ML project."],
     "practise_test_question": ["What is latency?", "What tools monitor cloud performance?"],
     "notes": "Shikai complete with Colab + ML + cloud intro. Bankai started: deployment + DBs."
-  }
+  },
+  {
+  "name": "Kōmyō Setsuna",
+  "kanji": "光明刹那",
+  "domain": "Language & Global Reach (Japanese)",
+  "release_command": "Shine across all tongues… Kōmyō Setsuna!",
+  "power": "Harnesses linguistic clarity and global understanding through language mastery and cultural connection.",
+  "shikai_unlocked": false,
+  "bankai_unlocked": false,
+  "dangai_unlocked": false,
+  "shikai_progress": 0,
+  "bankai_progress": 0,
+  "dangai_progress": 0,
+  "shikai_test_passed": false,
+  "bankai_test_passed": false,
+  "dangai_test_passed": false,
+  "shikai_tasks": [
+    {"task": "Complete Duolingo Japanese Section 1 (Unit 1 to 5)", "completed": false},
+    {"task": "Memorize 25 basic Japanese vocabulary words (e.g., 水, 猫, 学生)", "completed": false},
+    {"task": "Watch 1 anime episode with Japanese subtitles", "completed": false},
+    {"task": "Learn 5 basic kanji (日, 本, 人, 水, 学)", "completed": false},
+    {"task": "Introduce yourself in Japanese (write or record)", "completed": false}
+  ],
+  "bankai_tasks": [
+    {"task": "Complete Duolingo Japanese Section 2 (Unit 6 to 10)", "completed": false},
+    {"task": "Complete 7-day JLPT N5 Grammar Sheet", "completed": false},
+    {"task": "Watch 3 anime clips and write 1 sentence summary in Japanese", "completed": false},
+    {"task": "Learn 25 katakana vocabulary words (e.g., コンピューター, アニメ)", "completed": false},
+    {"task": "Speak for 2 minutes about your day in Japanese", "completed": false}
+  ],
+  "dangai_tasks": [
+    {"task": "Clear JLPT N5 mock test (listening + vocab)", "completed": false},
+    {"task": "Maintain a 15-day Duolingo streak", "completed": false},
+    {"task": "Watch a full anime episode with no subtitles", "completed": false}
+  ],
+  "shikai_test_question": [
+    "Translate to Japanese: 'I am a student and I like anime.'",
+    "What is the meaning of the kanji 学?"
+  ],
+  "bankai_test_question": [
+    "Translate 『これは水です。』 to English.",
+    "Name 3 katakana words and their English meaning."
+  ],
+  "dangai_test_question": [
+    "Write a 3-line self-introduction in Japanese.",
+    "Explain the difference between hiragana and katakana."
+  ],
+  "practise_test_question": [
+    "What is the meaning of 日本語?",
+    "How do you say 'good morning' in Japanese?"
+  ],
+  "notes": "Tracks Duolingo progress, anime comprehension, vocabulary and JLPT N5 goals. Kōmyō Setsuna's true form is unlocked through language fluency and consistency."
+}
+
 ]
