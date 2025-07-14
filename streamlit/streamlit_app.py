@@ -234,14 +234,15 @@ if page == "Zanpakutō Details":
 elif page == "Summary Page":
     st.title("📊 Zanpakutō Summary")
     selected = st.selectbox("View Summary of", zanpakuto_names)
-    for z in data:
-        if z["name"] == selected:
-            st.markdown(f"### 🗡️ {z['name']} ({z['kanji']}) — *{z['domain']}*")
-            st.markdown(f"> {z['power']}")
-            col1, col2, col3 = st.columns(3)
-            with col1: progress_bar("shikai", z.get("shikai_progress", 0))
-            with col2: progress_bar("bankai", z.get("bankai_progress", 0))
-            with col3: progress_bar("dangai", z.get("dangai_progress", 0))
+
+    z = next((zan for zan in data if zan["name"] == selected), None)
+    if z:
+        st.markdown(f"### 🗡️ {z['name']} ({z['kanji']}) — *{z['domain']}*")
+        st.markdown(f"> {z['power']}")
+        col1, col2, col3 = st.columns(3)
+        with col1: progress_bar("shikai", z.get("shikai_progress", 0))
+        with col2: progress_bar("bankai", z.get("bankai_progress", 0))
+        with col3: progress_bar("dangai", z.get("dangai_progress", 0))
 
 elif page == "Admin Stats":
     st.title("🛡️ Admin Dashboard")
