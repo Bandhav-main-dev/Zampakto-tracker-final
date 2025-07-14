@@ -250,17 +250,21 @@ elif page == "Admin Stats":
     st.markdown("---")
 
     for z_idx, z in enumerate(data):
-        # Ensure unique key with loop index
+        # Unique key using index and name
         zan_key = f"{z_idx}_" + re.sub(r'\W+', '_', z["name"])
 
         with st.container():
             st.markdown(f"### 🗡️ {z['name']} ({z['domain']})")
-            cols = st.columns(4)
+            cols = st.columns(6)
 
             cols[0].metric("Shikai 🔓", "✅" if z["shikai_unlocked"] else "❌")
             cols[1].progress(z["shikai_progress"] / 100, text=f"{z['shikai_progress']}%")
+
             cols[2].metric("Bankai 🔓", "✅" if z["bankai_unlocked"] else "❌")
             cols[3].progress(z["bankai_progress"] / 100, text=f"{z['bankai_progress']}%")
+
+            cols[4].metric("Dangai 🔓", "✅" if z["dangai_unlocked"] else "❌")
+            cols[5].progress(z["dangai_progress"] / 100, text=f"{z['dangai_progress']}%")
 
             with st.expander("📜 View Tasks & Status"):
                 st.subheader("Shikai Tasks")
@@ -301,6 +305,6 @@ elif page == "Admin Stats":
 
             st.markdown("---")
 
-    # Save updates
+    # Save updated data
     with open(DATA_FILE, "w") as f:
         json.dump(data, f, indent=2)
