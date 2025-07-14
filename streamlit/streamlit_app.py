@@ -218,7 +218,8 @@ if page == "Zanpakutō Details":
 
 elif page == "Summary Page":
     st.title("📊 Zanpakutō Summary Overview")
-    selected_summary = st.selectbox("Select Zanpakutō for Summary View", zanpakuto_names)
+    selected_summary_name = st.selectbox("Select Zanpakutō for Summary", zanpakuto_names)
+    selected_summary = next(z for z in data if z["name"] == selected_summary_name)
     z = next((z for z in data if z["name"] == selected_summary), None)
 
     if z:
@@ -229,14 +230,15 @@ elif page == "Summary Page":
         col1, col2, col3 = st.columns(3)
 
         with col1:
-            draw_gauge("Shikai", selected_summary['shikai_progress'])
+            draw_gauge("Shikai", selected_summary["shikai_progress"])
 
         with col2:
-            draw_gauge("Bankai", selected_summary['bankai_progress'])
+            draw_gauge("Bankai", selected_summary["bankai_progress"])
 
         with col3:
-            draw_gauge("Dangai", selected_summary['dangai_progress'])
-        st.markdown("---")
+            draw_gauge("Dangai", selected_summary["dangai_progress"])
+
+    st.markdown("---")
 
 
 elif page == "Admin Stats":
