@@ -121,9 +121,16 @@ if page == "Zanpakutō Details":
         st.markdown("---")
 
         st.markdown("### 🔥 Progress")
-        draw_gauge("Shikai", selected_zanpakuto['shikai_progress'])
-        draw_gauge("Bankai", selected_zanpakuto['bankai_progress'])
-        draw_gauge("Dangai", selected_zanpakuto['dangai_progress'])
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            draw_gauge("Shikai", selected_zanpakuto['shikai_progress'])
+
+        with col2:
+            draw_gauge("Bankai", selected_zanpakuto['bankai_progress'])
+
+        with col3:
+            draw_gauge("Dangai", selected_zanpakuto['dangai_progress'])
 
         # Shikai (Always visible)
         st.markdown("## 📋 Shikai Tasks")
