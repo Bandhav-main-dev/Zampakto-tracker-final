@@ -246,26 +246,27 @@ elif page == "Summary Page":
         with col2: progress_bar("bankai", z.get("bankai_progress", 0))
         with col3: progress_bar("dangai", z.get("dangai_progress", 0))
 
-# 🔐 Admin Login System
-if "admin_authenticated" not in st.session_state:
-    st.session_state.admin_authenticated = False
-
-if page == "Admin Stats" and not st.session_state.admin_authenticated:
-    st.markdown("<h2 style='color:#FFD700;'>🔐 Admin Login</h2>", unsafe_allow_html=True)
-    password_input = st.text_input("Enter Admin Password", type="password")
-    if st.button("Login"):
-        if password_input == ADMIN_PASSWORD:
-            st.success("Access granted! Welcome, Captain.")
-            st.session_state.admin_authenticated = True
-        else:
-            st.error("Wrong password. Access denied.")
-            st.rerun()
 
 # === Admin Page UI ===
 elif page == "Admin Stats":
     st.markdown("<h1 style='color:#FFD700;'>🧙‍♂️ Admin Zanpakutō Stats</h1>", unsafe_allow_html=True)
     st.markdown("---")
 
+    # 🔐 Admin Login System
+    if "admin_authenticated" not in st.session_state:
+        st.session_state.admin_authenticated = False
+
+    if page == "Admin Stats" and not st.session_state.admin_authenticated:
+        st.markdown("<h2 style='color:#FFD700;'>🔐 Admin Login</h2>", unsafe_allow_html=True)
+        password_input = st.text_input("Enter Admin Password", type="password")
+        if st.button("Login"):
+            if password_input == ADMIN_PASSWORD:
+                st.success("Access granted! Welcome, Captain.")
+                st.session_state.admin_authenticated = True
+                st.experimental_rerun()
+            else:
+                st.error("Wrong password. Access denied.")
+                st.rerun()
     for z_idx, z in enumerate(data):
         # Create unique key prefix using index and name
         zan_key = f"{z_idx}_" + re.sub(r'\W+', '_', z["name"])
