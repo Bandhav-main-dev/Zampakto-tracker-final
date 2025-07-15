@@ -18,7 +18,9 @@ model = genai.GenerativeModel("models/gemini-2.0-flash")
 st.markdown("""
 <style>
 body { background-color: #0a0a0a; color: #f1f1f1; }
+
 h1,h2,h3,h4 { color: #ffd700; font-weight: bold; }
+
 .stButton button {
     background-color: #ef4444; color: white;
     border: none; border-radius: 8px;
@@ -31,10 +33,14 @@ textarea, input {
     background-color: #1a1a1a; color: white;
     border: 1px solid #ffd700; border-radius: 6px;
 }
+
+/* Sidebar styling */
 section[data-testid="stSidebar"] {
     background-color: #111111;
     border-right: 2px solid #ffd700;
 }
+
+/* Getsuga Tensho Flash */
 .getsuga-flash {
     text-align: center;
     font-size: 2em;
@@ -56,54 +62,12 @@ section[data-testid="stSidebar"] {
 """, unsafe_allow_html=True)
 
 # === GETSUGA ANIMATION HELPER ===
-def unlock_animation(zanpakuto):
-    st.markdown("""
-    <style>
-    .centered {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-    .release {
-        font-size: 32px;
-        font-weight: bold;
-        color: gold;
-        text-shadow: 0 0 10px #FFD700, 0 0 20px #FFA500;
-        animation: fadein 2s ease-in-out;
-    }
-    .name {
-        font-size: 40px;
-        color: white;
-        font-weight: bold;
-        text-shadow: 0 0 10px #fff, 0 0 20px #f0f;
-    }
-    @keyframes fadein {
-        from { opacity: 0; transform: scale(0.5); }
-        to { opacity: 1; transform: scale(1); }
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-    with st.spinner("Spiritual Pressure Rising..."):
-        st.sleep(2)
-
-    st.markdown('<div class="centered">', unsafe_allow_html=True)
-    st.markdown(f'<div class="release">"{zanpakuto["release_command"]}"</div>', unsafe_allow_html=True)
-    st.sleep(1.5)
-    st.markdown(f'<div class="name">{zanpakuto["name"]} — {zanpakuto["kanji"]}</div>', unsafe_allow_html=True)
-    st.image("assets/spirit_burst.gif", caption="Bankai Release!", use_column_width=True)
-    st.markdown('</div>', unsafe_allow_html=True)
-    st.balloons()
-    st.toast(f"{zanpakuto['name']} Unlocked!", icon="⚔️")
-
 def getsuga_tensho(level):
     st.markdown(f"""
         <div class="getsuga-flash">
             ⚡ GETSUGA TENSHŌ — {level.upper()} UNLEASHED ⚡
         </div>
     """, unsafe_allow_html=True)
-
 # === LOAD / SAVE ===
 def load_data():
     with open(DATA_FILE, "r", encoding="utf-8") as f:
@@ -125,9 +89,9 @@ def progress_bar(label, percent):
 
     st.markdown(f"""
         <div style="margin-bottom:10px;">
-            <div style="font-weight:600; color: {hex_color};">{label.capitalize()} - {percent}%</div>
-            <div style="background-color:#2e2e2e; border-radius:6px; height:26px; overflow:hidden;">
-                <div style="width:{percent}%; background-color:{hex_color}; color:{text_color}; text-align:center; line-height:26px; height:26px;">
+            <div style="font-weight:600;">{label.capitalize()} - {percent}%</div>
+            <div style="background-color:#2e2e2e; border-radius:5px; height:24px; overflow:hidden;">
+                <div style="width:{percent}%; background-color:{hex_color}; color:{text_color}; text-align:center; line-height:24px; height:24px;">
                     {percent}%
                 </div>
             </div>
@@ -136,7 +100,7 @@ def progress_bar(label, percent):
 
 # === AI EVALUATION ===
 def evaluate_answer(question, answer):
-    prompt = f"Question: {question}\nAnswer: {answer}\n\nEvaluate the answer briefly."
+    prompt = f"Question: {question}\nAnswer: {answer}\n\nEvaluate the answer in 1-2 lines."
     try:
         response = model.generate_content(prompt)
         return response.text.strip()
@@ -155,21 +119,19 @@ def reiatsu_burst(level):
 
 # === TASK HANDLER ===
 def handle_tasks(zanpakuto, level, data):
-    keys = {
-        "tasks": f"{level}_tasks",
-        "progress": f"{level}_progress",
-        "unlocked": f"{level}_unlocked",
-        "test": f"{level}_test_question",
-        "passed": f"{level}_test_passed"
-    }
+    tasks_key = f"{level}_tasks"
+    progress_key = f"{level}_progress"
+    unlocked_key = f"{level}_unlocked"
+    test_question_key = f"{level}_test_question"
+    test_passed_key = f"{level}_test_passed"
 
     changed = False
-    if zanpakuto.get(keys["unlocked"]):
+    if zanpakuto.get(unlocked_key):
         st.success(f"✅ {level.capitalize()} already unlocked!")
         progress_bar(level, 100)
         return 100, changed
 
-    tasks = zanpakuto.get(keys["tasks"], [])
+    tasks = zanpakuto.get(tasks_key, [])
     for idx, task in enumerate(tasks):
         key = f"{zanpakuto['name']}_{level}_{idx}"
         checked = st.checkbox(task["task"], value=task.get("completed", False), key=key)
@@ -177,44 +139,44 @@ def handle_tasks(zanpakuto, level, data):
             task["completed"] = checked
             changed = True
 
-    task_done = sum(1 for t in tasks if t.get("completed"))
-    task_progress = int((task_done / len(tasks)) * 90) if tasks else 0
+    completed_count = sum(1 for t in tasks if t.get("completed"))
+    task_progress = int((completed_count / len(tasks)) * 90) if tasks else 0
 
-    questions = zanpakuto.get(keys["test"], [])
-    score = 0
+    test_questions = zanpakuto.get(test_question_key, [])
+    test_score = 0
 
-    if questions:
+    if test_questions:
         st.markdown(f"### 🧪 {level.capitalize()} Test Questions")
-        for i, q in enumerate(questions, 1):
+        for i, q in enumerate(test_questions, 1):
             st.markdown(f"**{i}. {q}**")
             ans_key = f"answer_{zanpakuto['name']}_{level}_{i}"
             ans = st.text_area("Your Answer", key=ans_key)
             if ans.strip():
-                fb_key = f"feedback_{zanpakuto['name']}_{level}_{i}"
-                if fb_key not in st.session_state:
+                feedback_key = f"feedback_{zanpakuto['name']}_{level}_{i}"
+                if feedback_key not in st.session_state:
                     with st.spinner("AI Evaluating..."):
                         feedback = evaluate_answer(q, ans)
-                        st.session_state[fb_key] = feedback
-                st.markdown(f"🧠 Feedback: _{st.session_state[fb_key]}_")
-                if any(word in st.session_state[fb_key].lower() for word in ["correct", "good", "right", "accurate"]):
-                    score += 1
+                        st.session_state[feedback_key] = feedback
+                st.markdown(f"🧠 Feedback: _{st.session_state[feedback_key]}_")
+                if any(w in st.session_state[feedback_key].lower() for w in ["correct", "good", "right", "accurate"]):
+                    test_score += 1
 
-        passed = score >= len(questions) // 2 + 1
-        if passed != zanpakuto.get(keys["passed"], False):
-            zanpakuto[keys["passed"]] = passed
+        passed_now = test_score >= len(test_questions) // 2 + 1
+        if passed_now != zanpakuto.get(test_passed_key, False):
+            zanpakuto[test_passed_key] = passed_now
             changed = True
-        if passed:
+        if passed_now:
             st.markdown(f'<div class="spiritual-slash">{level.capitalize()} Test Passed!</div>', unsafe_allow_html=True)
 
-    total = min(task_progress + (10 if zanpakuto.get(keys["passed"]) else 0), 100)
-    if zanpakuto.get(keys["progress"], 0) != total:
-        zanpakuto[keys["progress"]] = total
+    total_progress = min(task_progress + (10 if zanpakuto.get(test_passed_key) else 0), 100)
+    if zanpakuto.get(progress_key, 0) != total_progress:
+        zanpakuto[progress_key] = total_progress
         changed = True
 
-    progress_bar(level, total)
+    progress_bar(level, total_progress)
 
-    if total == 100 and not zanpakuto.get(keys["unlocked"]):
-        zanpakuto[keys["unlocked"]] = True
+    if total_progress == 100 and not zanpakuto.get(unlocked_key):
+        zanpakuto[unlocked_key] = True
         getsuga_tensho(level)
         st.markdown(f"##### 🗡️ \"_{zanpakuto['release_command']}_\"")
         st.success(f"🎉 {level.capitalize()} Unlocked!")
@@ -223,148 +185,25 @@ def handle_tasks(zanpakuto, level, data):
     if changed:
         save_data(data)
 
-    return total, changed
+    return total_progress, changed
 
 def reset_zanpakuto_progress(data):
     for z in data:
-        for lvl in ["shikai", "bankai", "dangai"]:
-            z[f"{lvl}_unlocked"] = False
-            z[f"{lvl}_progress"] = 0
-            z[f"{lvl}_test_passed"] = False
-            for task in z.get(f"{lvl}_tasks", []):
+        for level in ["shikai", "bankai", "dangai"]:
+            z[f"{level}_unlocked"] = False
+            z[f"{level}_progress"] = 0
+            z[f"{level}_test_passed"] = False
+            for task in z.get(f"{level}_tasks", []):
                 task["completed"] = False
 
-def render_admin_dashboard(data):
-    import re
-
-    st.markdown("## ⚙️ Manage Zanpakutōs")
-    st.markdown("---")
-
-    # === Add New Zanpakutō Section ===
-    st.markdown("## ➕ Add a New Zanpakutō")
-    with st.form("add_zanpakuto_form"):
-        new_name = st.text_input("Zanpakutō Name", max_chars=30)
-        new_kanji = st.text_input("Kanji", max_chars=30)
-        new_domain = st.text_input("Domain (e.g., AI, Python, etc.)", max_chars=40)
-        new_release = st.text_input("Release Command", max_chars=60)
-        new_power = st.text_area("Power Description", height=80)
-        new_notes = st.text_area("Personal Notes or Reflections (optional)", height=80)
-
-        submitted = st.form_submit_button("Add Zanpakutō")
-        if submitted:
-            if new_name and new_kanji and new_domain and new_release and new_power:
-                new_z = create_new_zanpakuto(
-                    new_name, new_kanji, new_domain, new_release, new_power, new_notes
-                )
-                data.append(new_z)
-                save_data(data)
-                st.success(f"✨ Zanpakutō '{new_name}' added successfully!")
-                st.experimental_rerun()
-            else:
-                st.warning("⚠️ Please fill in all required fields.")
-
-
-    # === Remove Existing Zanpakutō ===
-    with st.expander("🗑️ Remove Existing Zanpakutō"):
-        names = [z["name"] for z in data]
-        selected_remove = st.selectbox("Select to Remove", names)
-        if st.button("Remove Zanpakutō"):
-            data[:] = [z for z in data if z["name"] != selected_remove]
-            save_data(data)
-            st.success(f"🗑️ Removed {selected_remove}")
-            st.experimental_rerun()
-
-    st.markdown("---")
-
-    # === Existing Zanpakutō Stats and Controls ===
-    for z_idx, z in enumerate(data):
-        zan_key = f"{z_idx}_" + re.sub(r'\W+', '_', z["name"])
-
-        st.markdown(f"### 🗡️ {z['name']} ({z['domain']})")
-        cols = st.columns(6)
-        cols[0].metric("Shikai 🔓", "✅" if z["shikai_unlocked"] else "❌")
-        cols[1].progress(z["shikai_progress"] / 100, text=f"{z['shikai_progress']}%")
-
-        cols[2].metric("Bankai 🔓", "✅" if z["bankai_unlocked"] else "❌")
-        cols[3].progress(z["bankai_progress"] / 100, text=f"{z['bankai_progress']}%")
-
-        cols[4].metric("Dangai 🔓", "✅" if z["dangai_unlocked"] else "❌")
-        cols[5].progress(z["dangai_progress"] / 100, text=f"{z['dangai_progress']}%")
-
-        with st.expander("📜 View Tasks & Status"):
-            for level in ["shikai", "bankai", "dangai"]:
-                st.subheader(f"{level.capitalize()} Tasks")
-                for i, task in enumerate(z[f"{level}_tasks"]):
-                    task_key = re.sub(r'\W+', '_', task['task'])[:40]
-                    st.checkbox(
-                        f"{'🔹🔸🔻'[(['shikai','bankai','dangai'].index(level))]} {task['task']}",
-                        value=task["completed"],
-                        disabled=True,
-                        key=f"{zan_key}_{level}_{i}_{task_key}"
-                    )
-
-        with st.expander("🛠️ Admin Controls (Unlock Powers)"):
-            c1, c2, c3 = st.columns(3)
-            z["shikai_unlocked"] = c1.checkbox("Unlock Shikai", value=z["shikai_unlocked"], key=f"{zan_key}_unlock_shikai")
-            z["bankai_unlocked"] = c2.checkbox("Unlock Bankai", value=z["bankai_unlocked"], key=f"{zan_key}_unlock_bankai")
-            z["dangai_unlocked"] = c3.checkbox("Unlock Dangai", value=z["dangai_unlocked"], key=f"{zan_key}_unlock_dangai")
-
-        st.markdown("---")
-
-    save_data(data)
-
-# === DEFAULT GENERATORS ===
-def generate_default_tasks(level):
-    return [
-        {"task": f"{level.capitalize()} Task {i+1}", "completed": False}
-        for i in range(3)
-    ]
-
-def generate_default_questions(level):
-    return [f"What is the core concept of {level.capitalize()} Stage?"]
-
-def create_new_zanpakuto(name, kanji, domain, release_cmd, power, notes=""):
-    return {
-        "name": name,
-        "kanji": kanji,
-        "domain": domain,
-        "release_command": release_cmd,
-        "power": power,
-        "notes": notes,
-
-        "shikai_unlocked": False,
-        "bankai_unlocked": False,
-        "dangai_unlocked": False,
-        "shikai_progress": 0,
-        "bankai_progress": 0,
-        "dangai_progress": 0,
-        "shikai_test_passed": False,
-        "bankai_test_passed": False,
-        "dangai_test_passed": False,
-
-        "shikai_tasks": generate_default_tasks("shikai"),
-        "bankai_tasks": generate_default_tasks("bankai"),
-        "dangai_tasks": generate_default_tasks("dangai"),
-        "shikai_test_question": generate_default_questions("shikai"),
-        "bankai_test_question": generate_default_questions("bankai"),
-        "dangai_test_question": generate_default_questions("dangai")
-    }
-
-
-
-# === MAIN LOGIC: Streamlit Page Routing and Handling ===
-
-# Load Zanpakutō data
+# === MAIN LOGIC ===
 data = load_data()
 zanpakuto_names = [z["name"] for z in data]
-
-# Sidebar Navigation
 page = st.sidebar.radio("🔽 Navigation", ["Zanpakutō Details", "Summary Page", "Admin Stats"])
 
-# === Zanpakutō Details Page ===
 if page == "Zanpakutō Details":
     selected_name = st.sidebar.selectbox("Select Zanpakutō", zanpakuto_names)
-    z = next((z for z in data if z["name"] == selected_name), None)
+    z = next((x for x in data if x["name"] == selected_name), None)
 
     if z:
         st.markdown(f"### 🗡️ {z['name']} ({z['kanji']})")
@@ -373,77 +212,117 @@ if page == "Zanpakutō Details":
 
         total_changed = False
 
-        # === SHIKAI TASKS ===
-        prev_shikai = z.get("shikai_unlocked", False)
+        # Shikai
         _, changed = handle_tasks(z, "shikai", data)
         total_changed |= changed
 
-        if not prev_shikai and z["shikai_unlocked"]:
-            unlock_animation(z)
-
-        # === BANKAI TASKS ===
+        # Bankai
         if z.get("shikai_unlocked"):
-            prev_bankai = z.get("bankai_unlocked", False)
             _, changed = handle_tasks(z, "bankai", data)
             total_changed |= changed
-
-            if not prev_bankai and z["bankai_unlocked"]:
-                unlock_animation(z)
         else:
-            st.info("🔒 Unlock Shikai first to access Bankai tasks.")
+            st.info("🔒 Unlock Shikai first to see Bankai tasks.")
 
-        # === DANGAI TASKS ===
+        # Dangai
         if z.get("bankai_unlocked"):
-            prev_dangai = z.get("dangai_unlocked", False)
             _, changed = handle_tasks(z, "dangai", data)
             total_changed |= changed
-
-            if not prev_dangai and z["dangai_unlocked"]:
-                unlock_animation(z)
         elif z.get("shikai_unlocked"):
-            st.info("🔒 Unlock Bankai first to access Dangai tasks.")
+            st.info("🔒 Unlock Bankai first to see Dangai tasks.")
 
         if total_changed:
             save_data(data)
 
-# === Summary Page ===
 elif page == "Summary Page":
     st.title("📊 Zanpakutō Summary")
     selected = st.selectbox("View Summary of", zanpakuto_names)
-    z = next((zan for zan in data if zan["name"] == selected), None)
 
+    z = next((zan for zan in data if zan["name"] == selected), None)
     if z:
         st.markdown(f"### 🗡️ {z['name']} ({z['kanji']}) — *{z['domain']}*")
         st.markdown(f"> {z['power']}")
         col1, col2, col3 = st.columns(3)
-        with col1:
-            progress_bar("shikai", z.get("shikai_progress", 0))
-        with col2:
-            progress_bar("bankai", z.get("bankai_progress", 0))
-        with col3:
-            progress_bar("dangai", z.get("dangai_progress", 0))
+        with col1: progress_bar("shikai", z.get("shikai_progress", 0))
+        with col2: progress_bar("bankai", z.get("bankai_progress", 0))
+        with col3: progress_bar("dangai", z.get("dangai_progress", 0))
 
-# === Admin Page (Login & Stats) ===
+# 🔐 Admin Login System
+if "admin_authenticated" not in st.session_state:
+    st.session_state.admin_authenticated = False
+
+if page == "Admin Stats" and not st.session_state.admin_authenticated:
+    st.markdown("<h2 style='color:#FFD700;'>🔐 Admin Login</h2>", unsafe_allow_html=True)
+    password_input = st.text_input("Enter Admin Password", type="password")
+    if st.button("Login"):
+        if password_input == ADMIN_PASSWORD:
+            st.success("Access granted! Welcome, Captain.")
+            st.session_state.admin_authenticated = True
+            st.rerun()
+        else:
+            st.error("Wrong password. Access denied.")
+            st.rerun()
+
+# === Admin Page UI ===
 elif page == "Admin Stats":
     st.markdown("<h1 style='color:#FFD700;'>🧙‍♂️ Admin Zanpakutō Stats</h1>", unsafe_allow_html=True)
     st.markdown("---")
 
-    # Handle login state
-    if "admin_authenticated" not in st.session_state:
-        st.session_state.admin_authenticated = False
+    for z_idx, z in enumerate(data):
+        # Create unique key prefix using index and name
+        zan_key = f"{z_idx}_" + re.sub(r'\W+', '_', z["name"])
 
-    # Show login if not authenticated
-    if not st.session_state.admin_authenticated:
-        st.markdown("<h2 style='color:#FFD700;'>🔐 Admin Login</h2>", unsafe_allow_html=True)
-        password_input = st.text_input("Enter Admin Password", type="password")
-        if st.button("Login"):
-            if password_input == ADMIN_PASSWORD:
-                st.success("Access granted! Welcome, Captain.")
-                st.session_state.admin_authenticated = True
-                render_admin_dashboard(data)
-            else:
-                st.error("Wrong password. Access denied.")
-                st.rerun()
-    else:
-        render_admin_dashboard(data)
-        # Admin dashboard after login (delegated code handles metrics + controls)
+        with st.container():
+            st.markdown(f"### 🗡️ {z['name']} ({z['domain']})")
+            cols = st.columns(6)
+
+            cols[0].metric("Shikai 🔓", "✅" if z["shikai_unlocked"] else "❌")
+            cols[1].progress(z["shikai_progress"] / 100, text=f"{z['shikai_progress']}%")
+
+            cols[2].metric("Bankai 🔓", "✅" if z["bankai_unlocked"] else "❌")
+            cols[3].progress(z["bankai_progress"] / 100, text=f"{z['bankai_progress']}%")
+
+            cols[4].metric("Dangai 🔓", "✅" if z["dangai_unlocked"] else "❌")
+            cols[5].progress(z["dangai_progress"] / 100, text=f"{z['dangai_progress']}%")
+
+            with st.expander("📜 View Tasks & Status"):
+                st.subheader("Shikai Tasks")
+                for i, task in enumerate(z["shikai_tasks"]):
+                    task_key = re.sub(r'\W+', '_', task['task'])[:40]
+                    st.checkbox(
+                        f"🔹 {task['task']}",
+                        value=task["completed"],
+                        disabled=True,
+                        key=f"{zan_key}_shikai_{i}_{task_key}"
+                    )
+
+                st.subheader("Bankai Tasks")
+                for i, task in enumerate(z["bankai_tasks"]):
+                    task_key = re.sub(r'\W+', '_', task['task'])[:40]
+                    st.checkbox(
+                        f"🔸 {task['task']}",
+                        value=task["completed"],
+                        disabled=True,
+                        key=f"{zan_key}_bankai_{i}_{task_key}"
+                    )
+
+                st.subheader("Dangai Tasks")
+                for i, task in enumerate(z["dangai_tasks"]):
+                    task_key = re.sub(r'\W+', '_', task['task'])[:40]
+                    st.checkbox(
+                        f"🔻 {task['task']}",
+                        value=task["completed"],
+                        disabled=True,
+                        key=f"{zan_key}_dangai_{i}_{task_key}"
+                    )
+
+            with st.expander("🛠️ Admin Controls (Unlock Powers)"):
+                c1, c2, c3 = st.columns(3)
+                z["shikai_unlocked"] = c1.checkbox("Unlock Shikai", value=z["shikai_unlocked"], key=f"{zan_key}_unlock_shikai")
+                z["bankai_unlocked"] = c2.checkbox("Unlock Bankai", value=z["bankai_unlocked"], key=f"{zan_key}_unlock_bankai")
+                z["dangai_unlocked"] = c3.checkbox("Unlock Dangai", value=z["dangai_unlocked"], key=f"{zan_key}_unlock_dangai")
+
+            st.markdown("---")
+
+    # Save updated data after unlock toggles
+    with open(DATA_FILE, "w") as f:
+        json.dump(data, f, indent=2)
