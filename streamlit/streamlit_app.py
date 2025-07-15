@@ -444,5 +444,4 @@ elif page == "Admin Stats":
             else:
                 st.error("Wrong password. Access denied.")
                 st.rerun()
-    else:
         # Admin dashboard after login (delegated code handles metrics + controls)
