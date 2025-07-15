@@ -240,48 +240,29 @@ def render_admin_dashboard(data):
     st.markdown("## ⚙️ Manage Zanpakutōs")
     st.markdown("---")
 
-    # === Add New Zanpakutō ===
-    with st.expander("➕ Add New Zanpakutō"):
-        name = st.text_input("Zanpakutō Name")
-        kanji = st.text_input("Kanji")
-        domain = st.text_input("Skill Domain")
-        release = st.text_input("Release Command")
-        power = st.text_area("Power Description")
+    # === Add New Zanpakutō Section ===
+    st.markdown("## ➕ Add a New Zanpakutō")
+    with st.form("add_zanpakuto_form"):
+        new_name = st.text_input("Zanpakutō Name", max_chars=30)
+        new_kanji = st.text_input("Kanji", max_chars=30)
+        new_domain = st.text_input("Domain (e.g., AI, Python, etc.)", max_chars=40)
+        new_release = st.text_input("Release Command", max_chars=60)
+        new_power = st.text_area("Power Description", height=80)
+        new_notes = st.text_area("Personal Notes or Reflections (optional)", height=80)
 
-        if st.button("Add Zanpakutō"):
-            if name and kanji and domain and release and power:
-                if any(z["name"].lower() == name.lower() for z in data):
-                    st.warning("Zanpakutō already exists!")
-                else:
-                    new_z = {
-                        "name": name,
-                        "kanji": kanji,
-                        "domain": domain,
-                        "release_command": release,
-                        "power": power,
-                        "shikai_unlocked": False,
-                        "bankai_unlocked": False,
-                        "dangai_unlocked": False,
-                        "shikai_progress": 0,
-                        "bankai_progress": 0,
-                        "dangai_progress": 0,
-                        "shikai_tasks": [],
-                        "bankai_tasks": [],
-                        "dangai_tasks": [],
-                        "shikai_test_question": [],
-                        "bankai_test_question": [],
-                        "dangai_test_question": [],
-                        "shikai_test_passed": False,
-                        "bankai_test_passed": False,
-                        "dangai_test_passed": False,
-                        "notes": ""
-                    }
-                    data.append(new_z)
-                    save_data(data)
-                    st.success(f"✅ {name} added!")
-                    st.experimental_rerun()
+        submitted = st.form_submit_button("Add Zanpakutō")
+        if submitted:
+            if new_name and new_kanji and new_domain and new_release and new_power:
+                new_z = create_new_zanpakuto(
+                    new_name, new_kanji, new_domain, new_release, new_power, new_notes
+                )
+                data.append(new_z)
+                save_data(data)
+                st.success(f"✨ Zanpakutō '{new_name}' added successfully!")
+                st.experimental_rerun()
             else:
-                st.warning("Fill in all fields before adding.")
+                st.warning("⚠️ Please fill in all required fields.")
+
 
     # === Remove Existing Zanpakutō ===
     with st.expander("🗑️ Remove Existing Zanpakutō"):
@@ -331,6 +312,44 @@ def render_admin_dashboard(data):
         st.markdown("---")
 
     save_data(data)
+
+# === DEFAULT GENERATORS ===
+def generate_default_tasks(level):
+    return [
+        {"task": f"{level.capitalize()} Task {i+1}", "completed": False}
+        for i in range(3)
+    ]
+
+def generate_default_questions(level):
+    return [f"What is the core concept of {level.capitalize()} Stage?"]
+
+def create_new_zanpakuto(name, kanji, domain, release_cmd, power, notes=""):
+    return {
+        "name": name,
+        "kanji": kanji,
+        "domain": domain,
+        "release_command": release_cmd,
+        "power": power,
+        "notes": notes,
+
+        "shikai_unlocked": False,
+        "bankai_unlocked": False,
+        "dangai_unlocked": False,
+        "shikai_progress": 0,
+        "bankai_progress": 0,
+        "dangai_progress": 0,
+        "shikai_test_passed": False,
+        "bankai_test_passed": False,
+        "dangai_test_passed": False,
+
+        "shikai_tasks": generate_default_tasks("shikai"),
+        "bankai_tasks": generate_default_tasks("bankai"),
+        "dangai_tasks": generate_default_tasks("dangai"),
+        "shikai_test_question": generate_default_questions("shikai"),
+        "bankai_test_question": generate_default_questions("bankai"),
+        "dangai_test_question": generate_default_questions("dangai")
+    }
+
 
 
 # === MAIN LOGIC: Streamlit Page Routing and Handling ===
