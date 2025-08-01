@@ -10,7 +10,7 @@ st.set_page_config(page_title="Zanpakutō Tracker", layout="wide")
 
 # === CONFIG ===
 DATA_FILE = os.path.join(os.path.dirname(__file__), "zanpakuto_data.json")
-GOOGLE_API_KEY = "AIzaSyDsiipSZorPJHovyDHLb86XXBx-aYipAMM"
+GOOGLE_API_KEY = "AIzaSyANdLYlyx0FPadoBjJ6p_v04SQbCX92JHY"
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel("models/gemini-2.0-flash")
 
